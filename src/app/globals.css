@@ -1,6 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .flexCenter {
+    @apply flex justify-center items-center;
+  }
+  .flexBetween {
+    @apply flex justify-between items-center;
+  }
+  .max-container {
+    @apply mx-auto max-w-[1440px];
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
