@@ -26,4 +26,5 @@ export const CATEGORY_NAV = [
     },
     { column:"シリーズから探す" },
     { column:"カテゴリから探す" },
+    { column:"利用ガイド" },
 ]

@@ -20,9 +20,9 @@ interface categoryItems {
 
 const CategoryNavbar = () => {
     return (
-        <div className='flexCenter gap-10 max-container p-2 m-4  rounded-3xl '>
+        <div className='md:flexCenter md:flex-row my-10 gap-2 max-container md:p-2 md:m-4 rounded-3xl '>
             {CATEGORY_NAV.map((category:categoryItems) => (
-                <div className='flex' key={`${category.column}`}>
+                <div className='hidden md:flex ' key={`${category.column}`}>
                     <NavigationMenu>
                         <NavigationMenuList>
                             <NavigationMenuItem>
@@ -37,9 +37,9 @@ const CategoryNavbar = () => {
                     </NavigationMenu>
                 </div>
             ))}
-            <div>
-                <Link href="/" className='font-medium text-sm pb-2 border-b-2 border-gray-400 hover:border-red-300 duration-300'>利用ガイド</Link>
-            </div>
+           {/*  <div>
+                <Link href="/" className='font-medium text-sm pb-2 border-b-2 border-gray-400 hover:border-red-300 duration-300 whitespace-nowrap'>利用ガイド</Link>
+            </div> */}
         </div>
     )
 }
