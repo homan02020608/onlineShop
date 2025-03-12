@@ -12,10 +12,10 @@ const sidebarInfo = [
 
 const UserPageSidebar = () => {
     return (
-        <div className='flex flex-col bg-white/50 rounded-xl p-2'>
-                <h1 className='text-3xl  p-2 m-2'>My Page</h1>
+        <div className='flex flex-col bg-white/50 rounded-xl  border border-gray-200 '>
+                <h1 className='text-md p-2 m-2  whitespace-nowrap'>My Page</h1>
                 {sidebarInfo.map((info,i) => (
-                    <Link href={info.path} className='bg-gray-100 text-blue-600 p-4 m-2 rounded-md hover:bg-gray-200 hover:cursor-pointer hover:font-semibold'key={`column-${i}`}>{info.column}</Link>
+                    <Link href={info.path} className='flex text-sm md:text-md min-w-[100px] max-w-[300px] text-blue-600 p-2 m-2 rounded-md hover:bg-gray-100 hover:cursor-pointer hover:font-semibold hover:underline'key={`column-${i}`}>{info.column}</Link>
                 ))}
         </div>
     )

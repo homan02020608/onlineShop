@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useState } from 'react'
 import {
     Card,
@@ -18,8 +19,12 @@ import {
 
 import StarRateIcon from '@mui/icons-material/StarRate';
 import { Timestamp, collection, getDocs, query, where } from 'firebase/firestore';
-import { db } from '../../firebase/firebase';
+
 import Image from 'next/image';
+import { useDispatch } from 'react-redux';
+import { addtoCart ,increase } from '@/redux/cartSlice';
+
+
 
 
 interface ProductInfoProps {
@@ -30,12 +35,8 @@ interface ProductInfoProps {
 }
 
 const ProductCard = ({ title, productId, category }: ProductInfoProps) => {
-    /*     const q = query(collection(db, "products"), where("productId", "==", `${productParams}`))
-        const querySnapShot = await getDocs(q);
-        const productList = querySnapShot.docs.map((doc: any) => ({
-            ...doc.data()
-    
-        })) */
+    const dispatch = useDispatch()
+    const quantity = 1
 
     return (
         <div className='flexCenter md:flex-row gap-2 flex-col lg:gap-20 '>
@@ -68,7 +69,8 @@ const ProductCard = ({ title, productId, category }: ProductInfoProps) => {
                         </Select>
                     </CardContent>
                     <CardFooter className='mt-10'>
-                        <button className='w-full m-2 p-4 bg-sky-200 rounded-full hover:bg-sky-100'>カートに入れる</button>
+                        {/* <button className='w-full m-2 p-4 bg-sky-200 rounded-full hover:bg-sky-100' onClick={() => dispatch(addtoCart({title, productId ,quantity}))}>カートに入れる</button> */}
+                        <button className='w-full m-2 p-4 bg-sky-200 rounded-full hover:bg-sky-100' onClick={() => dispatch(increase({title, productId ,quantity}))}>カートに入れる</button>
                     </CardFooter>
                 </Card>
             </div>

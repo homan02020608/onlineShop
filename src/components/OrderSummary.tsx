@@ -1,7 +1,12 @@
+"use client"
+import { RootState } from '@/redux/store'
 import Link from 'next/link'
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 const OrderSummary = () => {
+    const cartAmount = useSelector((state : RootState) => state.cart.amount)
+    console.log("amount:",cartAmount)
     return (
         <div >
             <div className='flexCenter flex-col border border-gray-400 p-2 mx-4 whitespace-nowrap w-full md:w-[400px] '>
@@ -9,7 +14,7 @@ const OrderSummary = () => {
                 <div className='flex-col p-4  *:flexBetween w-full'>
                     <div className='gap-x-10'>
                         <div>Total:</div>
-                        <div>￥36000</div>
+                        <div>￥{cartAmount}</div>
                     </div>
                     <div className='gap-x-10'>
                         <div>Shipping:</div>
