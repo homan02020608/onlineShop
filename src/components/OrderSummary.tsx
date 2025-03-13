@@ -5,8 +5,8 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 const OrderSummary = () => {
-    const cartAmount = useSelector((state : RootState) => state.cart.amount)
-    console.log("amount:",cartAmount)
+    const cartTotal = useSelector((state : RootState) => state.cart.total)
+    
     return (
         <div >
             <div className='flexCenter flex-col border border-gray-400 p-2 mx-4 whitespace-nowrap w-full md:w-[400px] '>
@@ -14,7 +14,7 @@ const OrderSummary = () => {
                 <div className='flex-col p-4  *:flexBetween w-full'>
                     <div className='gap-x-10'>
                         <div>Total:</div>
-                        <div>￥{cartAmount}</div>
+                        <div>￥{cartTotal}</div>
                     </div>
                     <div className='gap-x-10'>
                         <div>Shipping:</div>
@@ -28,6 +28,7 @@ const OrderSummary = () => {
                         <div>Coupon:</div>
                         <div>なし</div>
                     </div>
+
                     <div>
                         <Link href="/" className='flexCenter bg-black/80 text-white rounded-none w-full px-2 my-4 hover:bg-black/60 '> CheckOut </Link>
                     </div>

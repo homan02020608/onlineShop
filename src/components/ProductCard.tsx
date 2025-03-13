@@ -22,7 +22,7 @@ import { Timestamp, collection, getDocs, query, where } from 'firebase/firestore
 
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
-import { addtoCart ,increase } from '@/redux/cartSlice';
+import { increase } from '@/redux/cartSlice';
 
 
 
