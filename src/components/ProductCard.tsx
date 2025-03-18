@@ -32,9 +32,10 @@ interface ProductInfoProps {
     title: string
     productId: string
     category: string
+    price : number
 }
 
-const ProductCard = ({ title, productId, category }: ProductInfoProps) => {
+const ProductCard = ({ title, productId, category, price }: ProductInfoProps) => {
     const dispatch = useDispatch()
     const quantity = 1
 
@@ -56,6 +57,7 @@ const ProductCard = ({ title, productId, category }: ProductInfoProps) => {
                     <CardContent>
                         <p><span className='font-semibold'>商品番号:</span> {productId}</p>
                     </CardContent>
+                    <CardContent>￥{price}(税込)</CardContent>
                     <CardContent>
                         <Select>
                             <SelectTrigger className="w-[100px]">

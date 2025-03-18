@@ -25,6 +25,12 @@ export const CATEGORY_NAV = [
         ]
     },
     { column:"シリーズから探す" },
-    { column:"カテゴリから探す" },
+    { 
+        column:"カテゴリから探す" ,
+        menu: [
+            {item: "生写真", path:"/photos"},
+            {item: "グッズ", path:"/goods"},
+        ]
+    },
     { column:"利用ガイド" },
 ]

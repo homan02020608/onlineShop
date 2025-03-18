@@ -25,6 +25,7 @@ const page = async ({ params } : { params : Promise<{product : string}> }) => {
                             title={info.title}
                             productId={info.productId}
                             category={info.category}
+                            price={info.price}
                         />
                     ))}
             </div>

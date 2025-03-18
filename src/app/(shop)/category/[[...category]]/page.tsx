@@ -25,7 +25,7 @@ const categoryPage = async ({ params }: { params: Promise<{ category: string }> 
             {categoryItems.map((item: categoryItem) => (
                 <div key={item.id} className='flexCenter flex-col  m-2   border-2 border-gray-100 shadow-lg rounded-xl md:m-6 bg-white'>
                         <Image src="/carouselImage01.jpeg" height={500} width={500} sizes='100vh' style={{ width: "100%", height: "auto" }} alt='carouselImage01' className='rounded-xl' />
-                        <Link href={`/product/${item.productId}`} className='font-semibold  p-2 px-20 m-2 border-2  rounded-full hover:bg-gray-100'>商品一覧</Link>
+                        <Link href={`/product/${item.productId}`} className='font-semibold  p-2 px-14 m-2 border-2  rounded-full hover:bg-gray-100 whitespace-nowrap'>商品一覧</Link>
                 </div>
             ))}
         </div>

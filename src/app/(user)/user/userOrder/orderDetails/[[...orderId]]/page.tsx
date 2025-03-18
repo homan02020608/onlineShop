@@ -12,11 +12,18 @@ import {
 } from "@/components/ui/table"
 
 
+
 interface orderDetail {
-  productId?: string
-  quantity?: number
-  id?: string
+  id: string
+  order?: any
 }
+
+interface itemDetail {
+  productId : string
+  quantity : number
+  price: number
+}
+
 
 const page = async ({ params }: { params: Promise<{ orderId: string }> }) => {
   const orderIdParmas = (await params).orderId
@@ -32,23 +39,24 @@ const page = async ({ params }: { params: Promise<{ orderId: string }> }) => {
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">商品ID</TableHead>
-            <TableHead className="">商品番号</TableHead>
             <TableHead className="">値段</TableHead>
             <TableHead className="">件数</TableHead>
             <TableHead className="text-right">Amount</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody>
-          {orderDetails.map((detail: orderDetail) => (
-            <TableRow key={detail.id} className='whitespace-nowrap'>
-              <TableCell className="font-medium">{detail.id}</TableCell>
-              <TableCell>{detail.productId}</TableCell>
-              <TableCell>3000円</TableCell>
-              <TableCell>{detail.quantity}</TableCell>
-              <TableCell className="text-right">￥6000.00</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
+        {orderDetails.map((detail : orderDetail) => (
+             <TableBody key={detail.id}>
+                {detail.order.map((items : itemDetail) =>(
+                  <TableRow key={items.productId} className='whitespace-nowrap'>
+                    <TableCell className="font-medium">{items.productId}</TableCell>
+                    <TableCell>{items.price}</TableCell>
+                    <TableCell>{items.quantity}</TableCell>
+                    <TableCell className="text-right">￥{items.price * items.quantity}</TableCell>
+                  </TableRow>
+                ))}
+             </TableBody>
+        ))}
+
       </Table>
     </div>
   )
