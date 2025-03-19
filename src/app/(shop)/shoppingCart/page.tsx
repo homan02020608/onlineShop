@@ -1,8 +1,16 @@
 import OrderSummary from '@/components/OrderSummary'
 import ShoppingCartList from '@/components/ShoppingCartList'
+import { collection, getDocs, query, where } from 'firebase/firestore'
 import React from 'react'
+import { db } from '../../../../firebase/firebase'
 
-const shoppingCartPage = () => {
+const shoppingCartPage = async () => {
+/*   const userSnapShot = await getDocs(query(collection(db,'user'), where("userId", "==" , "testing01")))
+  const userInfo = userSnapShot.docs.map((doc : any) => ({
+    ...doc.data()
+  }))
+  console.log(userInfo) */
+  
   return (
     <div className='flex flex-col '>
       <div className='flexCenter '>

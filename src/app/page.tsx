@@ -3,6 +3,7 @@ import MultiCarousel from "@/components/MultiCarousel";
 
 
 export default function Home() {
+ 
   return (
     <div>
       <CategoryNavbar />

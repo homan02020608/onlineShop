@@ -3,7 +3,6 @@ import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MenuIcon from '@mui/icons-material/Menu';
-import PersonIcon from '@mui/icons-material/Person';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import SearchIcon from '@mui/icons-material/Search';
 import AuthButton from './AuthButton';
@@ -11,29 +10,58 @@ import { useUser } from '@clerk/nextjs';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { signIn, signOut } from '@/redux/userSlice';
+import { addDoc, collection, doc, getDocs, query, setDoc, where } from 'firebase/firestore';
+import { db } from '../../firebase/firebase';
 
 const Navbar = () => {
+
+    //const [userData, setUserData] = useState();
+
     const { isSignedIn, user } = useUser();
 
     const userState = useSelector((state: RootState) => state.user.user)
 
     const dispatch = useDispatch();
 
+
+    const fetchUserInfo = async() => {
+        const userSnapShot = await getDocs(query(collection(db,'user'), where("userId", "==" , `${user?.id}`)))
+        const userInfo = userSnapShot.docs.map((doc : any) => ({
+            ...doc.data()
+          }))
+        //setData(userInfo)
+        if(userInfo.length === 0){
+            await setDoc(doc(db, "user", `${user?.id}`),{
+                userId : user?.id,
+                firstName: user?.firstName,
+                lastName : user?.lastName,
+                email : user?.primaryEmailAddress?.emailAddress,
+                address : "",
+                create_At : new Date(),
+                update_At : new Date()
+            })
+            console.log("success add data")
+        }
+        dispatch(signIn({
+            id: user?.id,
+            first_name: user?.firstName,
+            last_name: user?.lastName,
+            email: user?.primaryEmailAddress?.emailAddress ,
+        }))
+
+    }
+
     useEffect(() => {
         if (isSignedIn) {
-            dispatch(signIn({
-                id: user.id,
-                email: user?.primaryEmailAddress?.emailAddress ,
-                first_name: user.firstName,
-                last_name: user.lastName,
-            }))
+            fetchUserInfo()
+            
         } else {
             dispatch(signOut())
         }
     }, [isSignedIn])
 
-    //console.log("UserState:", userState)
-   
+    console.log("UserState:", userState)
+    
     
     return (
         <nav className='flexBetween top-0 bg-white/50 opacity-100  p-1 min-h-[10vh] shadow-md'>
