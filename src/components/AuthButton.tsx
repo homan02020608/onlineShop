@@ -13,8 +13,8 @@ const AuthButton = () => {
         <>
             {/* ログイン後 */}
             <SignedIn>
-                <Link href={`/user`} className='flexCenter flex-col p-2 rounded-2xl hover:bg-slate-50 text-sm md:text-base whitespace-nowrap '>
-                    <PersonIcon className='' />
+                <Link href={`/user`} className='flexCenter flex-col p-2 rounded-2xl hover:bg-slate-50 text-sm whitespace-nowrap '>
+                    <PersonIcon />
                     <p className='hidden md:flex'>マイページ</p>
                 </Link>
                 <SignOutButton/>

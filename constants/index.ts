@@ -14,7 +14,7 @@ export const CATEGORY_NAV = [
             {item: "4月商品",path:"/",},
         ] 
     },
-    { column:"おすすめ" },
+    //{ column:"おすすめ" },
     { 
         column:"メンバーから探す",
         menu:[

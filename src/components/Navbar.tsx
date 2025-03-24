@@ -60,11 +60,11 @@ const Navbar = () => {
         }
     }, [isSignedIn])
 
-    console.log("UserState:", userState)
+    //console.log("UserState:", userState)
     
     
     return (
-        <nav className='flexBetween top-0 bg-white/50 opacity-100  p-1 min-h-[10vh] shadow-md'>
+        <nav className='flexBetween top-0 bg-white/50 opacity-100  p-1 min-h-[10vh] shadow-md w-full'>
             <div className='flex justify-center items-center font-semibold text-gray-500  m-2 p-2 text-xl'>
                 <Link href="/">
                     WebShop
@@ -73,18 +73,18 @@ const Navbar = () => {
 
             <div className='flexCenter p-2 pr-10 left-0 '>
                 <div className='flex gap-2 font-normal text-gray-500 md:gap-6 lg:gap-10'>
-                    <div className='flexCenter p-2 opacity-0 md:opacity-100'>
-                        <div className='flexCenter bg-slate-100 min-w-[10px] max-w-3xl h-[50px] rounded-full relative hidden md:min-w-[300px]'>
+                    <div className='hidden md:flex duration-500'>
+                        <div className='flexCenter bg-slate-100 min-w-[10px] max-w-2xl h-[50px] rounded-full relative hidden md:min-w-[250px]'>
                             <input type="text" className='w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-md border border-slate-200 rounded-full pl-4 py-3 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 ' placeholder='キーワードを入力' />
                             <button type='button' className='p-2'><SearchIcon /></button>
                         </div>
                     </div>
 
-                    <Link href="/userFavorite" className='hidden md:flexCenter flex-col p-2 rounded-2xl hover:bg-slate-50 text-sm md:text-base whitespace-nowrap '>
+                    <Link href="/user/userFavourite" className='flexCenter flex-col p-2 rounded-2xl hover:bg-slate-50 text-sm  whitespace-nowrap '>
                         <FavoriteIcon />
-                        <p >気に入り</p>
+                        <p className='hidden md:flex'>気に入り</p>
                     </Link>
-                    <Link href="/shoppingCart" className='flexCenter flex-col p-2 rounded-2xl hover:bg-slate-50 text-sm md:text-base whitespace-nowrap'>
+                    <Link href="/shoppingCart" className='flexCenter flex-col p-2 rounded-2xl hover:bg-slate-50 text-sm  whitespace-nowrap'>
                         <ShoppingCartIcon />
                         <p className='hidden md:flex'>カート</p>
                     </Link>

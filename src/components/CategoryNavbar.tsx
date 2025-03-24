@@ -20,14 +20,14 @@ interface categoryItems {
 
 const CategoryNavbar = () => {
     return (
-        <div className='md:flexCenter md:flex-row my-10 gap-2 max-container md:p-2 md:m-4 rounded-3xl '>
+        <div className=' gap-2 max-container md:flexCenter md:flex-row md:p-2 md: rounded-3xl '>
             {CATEGORY_NAV.map((category:categoryItems) => (
                 <div className='hidden md:flex ' key={`${category.column}`}>
                     <NavigationMenu>
                         <NavigationMenuList>
                             <NavigationMenuItem>
                                 <NavigationMenuTrigger className=''>{category.column}</NavigationMenuTrigger>
-                                <NavigationMenuContent className='flex flex-col px-2 duration-500'>
+                                <NavigationMenuContent className='flex flex-col duration-500'>
                                   {category.menu?.map(({ item, path } : {item:string, key:string, path:string})=> (
                                      <NavigationMenuLink href={`/category/${path}`} key={`${category.column}-${item}`} className='whitespace-nowrap my-2 p-4 hover:text-slate-400 hover:border-purple-200 hover:border-b-2 '>{item}</NavigationMenuLink>
                                   ))}

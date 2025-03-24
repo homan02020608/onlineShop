@@ -10,10 +10,10 @@ const page = async ({ params } : { params : Promise<{product : string}> }) => {
     const q = query(collection(db, "products"), where("productId", "==", `${productIdParams}`))
     const querySnapShot = await getDocs(q);
     const product = querySnapShot.docs.map((doc: any) => ({
-        ...doc.data()
+        ...doc.data(), id:doc.id 
 
     }))
-    //console.log(product)
+    console.log(product)
 
     return (
         <div className='flexCenter m-4'>
@@ -25,7 +25,10 @@ const page = async ({ params } : { params : Promise<{product : string}> }) => {
                             title={info.title}
                             productId={info.productId}
                             category={info.category}
+                            imageUrl={info.imageUrl}
                             price={info.price}
+                            bookmarked={info.bookmark}
+                            id={info.id}
                         />
                     ))}
             </div>

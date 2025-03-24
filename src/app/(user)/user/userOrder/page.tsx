@@ -20,7 +20,7 @@ const page = async () => {
   }))
   //console.log(userOrders)
   return (
-    <div className='flex flex-col gap-10  p-2 h-[50vh] '>
+    <div className='flex flex-col gap-10 p-2 m-4  '>
       <h1 className='flexCenter'>Your Order</h1>
       <div>
         <div className='flex flex-col  border border-gray-100 p-2 m-4 gap-4 min-w-[300px] md:w-[500px]'>

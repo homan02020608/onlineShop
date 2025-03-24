@@ -8,7 +8,6 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-
 import {
     Select,
     SelectContent,
@@ -16,13 +15,15 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import StarRateIcon from '@mui/icons-material/StarRate';
-import { Timestamp, collection, getDocs, query, where } from 'firebase/firestore';
+import { Timestamp, collection, doc, getDocs, query, setDoc, updateDoc, where } from 'firebase/firestore';
 
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
 import { increase } from '@/redux/cartSlice';
+import { db } from '../../firebase/firebase';
 
 
 
@@ -32,17 +33,33 @@ interface ProductInfoProps {
     title: string
     productId: string
     category: string
-    price : number
+    imageUrl : string
+    price: number
+    bookmarked:boolean
+    id:string
 }
 
-const ProductCard = ({ title, productId, category, price }: ProductInfoProps) => {
+const ProductCard = ({ title, productId, category, price , bookmarked , imageUrl ,id}: ProductInfoProps) => {
     const dispatch = useDispatch()
     const quantity = 1
+    const [bookmark, setBookmark] = useState(bookmarked)
+    const updateBookmarkItem = async () => {
+        await updateDoc(doc(db, "products" , `${id}`), {
+            bookmark : !bookmark
+        })
+        console.log("success")
+    }
+    const updateBookmark = () => {
+        updateBookmarkItem()
+        setBookmark(!bookmark)
+        
+    }
 
+    //console.log(bookmarked)
     return (
         <div className='flexCenter md:flex-row gap-2 flex-col lg:gap-20 '>
             <div className='flexCenter  w-[600px] p-8'>
-                <Image src="/carouselImage02.jpeg" height={500} width={500} sizes='100vh' style={{width:"100%", height:"auto"}} alt='carouselImage02' />
+                <Image src={`/${imageUrl}`} height={500} width={500} sizes='100vh' style={{ width: "100%", height: "auto" }} alt='carouselImage02' />
             </div>
 
             <div className='flex justify-center m-6 w-auto min-h-[65vh]  '>
@@ -58,6 +75,10 @@ const ProductCard = ({ title, productId, category, price }: ProductInfoProps) =>
                         <p><span className='font-semibold'>商品番号:</span> {productId}</p>
                     </CardContent>
                     <CardContent>￥{price}(税込)</CardContent>
+                    <CardContent onClick={() => updateBookmark() }>
+                        { bookmark ? <FavoriteIcon/> : <FavoriteBorderIcon /> }
+                        Bookmark State: {String(bookmarked)}
+                    </CardContent>
                     <CardContent>
                         <Select>
                             <SelectTrigger className="w-[100px]">
@@ -72,7 +93,7 @@ const ProductCard = ({ title, productId, category, price }: ProductInfoProps) =>
                     </CardContent>
                     <CardFooter className='mt-10'>
                         {/* <button className='w-full m-2 p-4 bg-sky-200 rounded-full hover:bg-sky-100' onClick={() => dispatch(addtoCart({title, productId ,quantity}))}>カートに入れる</button> */}
-                        <button className='w-full m-2 p-4 bg-sky-200 rounded-full hover:bg-sky-100' onClick={() => dispatch(increase({title, productId ,quantity}))}>カートに入れる</button>
+                        <button className='w-full m-2 p-4 bg-sky-200 rounded-full hover:bg-sky-100' onClick={() => dispatch(increase({ title, productId, quantity }))}>カートに入れる</button>
                     </CardFooter>
                 </Card>
             </div>

@@ -15,7 +15,7 @@ const sliderImage = [
   "carouselImage03",
   "carouselImage04",
 
-]
+] 
 
 const MultiCarousel = () => {
   const [currIndex, setCurrIndex] = useState(0)
