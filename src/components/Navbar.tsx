@@ -10,12 +10,13 @@ import { useUser } from '@clerk/nextjs';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { signIn, signOut } from '@/redux/userSlice';
-import { addDoc, collection, doc, getDocs, query, setDoc, where } from 'firebase/firestore';
+import { collection, doc, getDocs, query, setDoc, where } from 'firebase/firestore';
 import { db } from '../../firebase/firebase';
+import AnimationLink from './AnimationLink';
 
 const Navbar = () => {
 
-    //const [userData, setUserData] = useState();
+    const [open, setOpen] = useState(false);
 
     const { isSignedIn, user } = useUser();
 
@@ -24,21 +25,21 @@ const Navbar = () => {
     const dispatch = useDispatch();
 
 
-    const fetchUserInfo = async() => {
-        const userSnapShot = await getDocs(query(collection(db,'user'), where("userId", "==" , `${user?.id}`)))
-        const userInfo = userSnapShot.docs.map((doc : any) => ({
+    const fetchUserInfo = async () => {
+        const userSnapShot = await getDocs(query(collection(db, 'user'), where("userId", "==", `${user?.id}`)))
+        const userInfo = userSnapShot.docs.map((doc: any) => ({
             ...doc.data()
-          }))
+        }))
         //setData(userInfo)
-        if(userInfo.length === 0){
-            await setDoc(doc(db, "user", `${user?.id}`),{
-                userId : user?.id,
+        if (userInfo.length === 0) {
+            await setDoc(doc(db, "user", `${user?.id}`), {
+                userId: user?.id,
                 firstName: user?.firstName,
-                lastName : user?.lastName,
-                email : user?.primaryEmailAddress?.emailAddress,
-                address : "",
-                create_At : new Date(),
-                update_At : new Date()
+                lastName: user?.lastName,
+                email: user?.primaryEmailAddress?.emailAddress,
+                address: "",
+                create_At: new Date(),
+                update_At: new Date()
             })
             console.log("success add data")
         }
@@ -46,7 +47,7 @@ const Navbar = () => {
             id: user?.id,
             first_name: user?.firstName,
             last_name: user?.lastName,
-            email: user?.primaryEmailAddress?.emailAddress ,
+            email: user?.primaryEmailAddress?.emailAddress,
         }))
 
     }
@@ -54,15 +55,29 @@ const Navbar = () => {
     useEffect(() => {
         if (isSignedIn) {
             fetchUserInfo()
-            
+
         } else {
             dispatch(signOut())
         }
     }, [isSignedIn])
 
     //console.log("UserState:", userState)
-    
-    
+    /*     <div className=" h-fit w-fit "
+        onMouseEnter={() => setOpen(true)}
+        onMouseLeave={() => setOpen(false)}
+      >
+        <div className="border border-red-200 relative text-black ">
+          <span
+            style={{
+              transform: open ? "scaleX(1)" : "scaleX(0)"
+            }}
+            className="absolute -bottom-2 -left-2 -right-2 h-1 origin-left rounded-full bg-slate-300 transition-transform duration-300 ease-out"
+          />
+          HomePage
+        </div>
+      </div> */
+
+
     return (
         <nav className='flexBetween top-0 bg-white/50 opacity-100  p-1 min-h-[10vh] shadow-md w-full'>
             <div className='flex justify-center items-center font-semibold text-gray-500  m-2 p-2 text-xl'>
@@ -80,14 +95,19 @@ const Navbar = () => {
                         </div>
                     </div>
 
-                    <Link href="/user/userFavourite" className='flexCenter flex-col p-2 rounded-2xl hover:bg-slate-50 text-sm  whitespace-nowrap '>
+                    <AnimationLink 
+                        href="/user/userFavourite"
+                        title='気に入り'
+                    >
                         <FavoriteIcon />
-                        <p className='hidden md:flex'>気に入り</p>
-                    </Link>
-                    <Link href="/shoppingCart" className='flexCenter flex-col p-2 rounded-2xl hover:bg-slate-50 text-sm  whitespace-nowrap'>
-                        <ShoppingCartIcon />
-                        <p className='hidden md:flex'>カート</p>
-                    </Link>
+                    </AnimationLink>
+
+                    <AnimationLink 
+                        href="/shoppingCart"
+                        title='カート'
+                    >
+                       <ShoppingCartIcon />
+                    </AnimationLink>
 
                     <AuthButton />
 

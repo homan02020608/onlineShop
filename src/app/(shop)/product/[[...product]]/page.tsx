@@ -13,7 +13,7 @@ const page = async ({ params } : { params : Promise<{product : string}> }) => {
         ...doc.data(), id:doc.id 
 
     }))
-    console.log(product)
+    //console.log(product)
 
     return (
         <div className='flexCenter m-4'>

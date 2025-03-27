@@ -7,14 +7,12 @@ import Link from 'next/link';
 
 
 const page = async () => {
-    //const { userId, sessionId } = await auth();
-    //const user = await currentUser();
     const q = query(collection(db, "products"), where("bookmark", "==", true));
     const querySnapShot = await getDocs(q);
     const favouriteProducts = querySnapShot.docs.map((doc: any) => ({
         ...doc.data(), id: doc.id
     }))
-    //console.log(favouriteProducts)
+    
     return (
         <div className='flexCenter flex-col  p-2 gap-10'>
             <h1 className=''>Your Order</h1>
