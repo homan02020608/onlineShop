@@ -13,6 +13,7 @@ import { signIn, signOut } from '@/redux/userSlice';
 import { collection, doc, getDocs, query, setDoc, where } from 'firebase/firestore';
 import { db } from '../../firebase/firebase';
 import AnimationLink from './AnimationLink';
+import DropdownCart from './DropdownCart';
 
 const Navbar = () => {
 
@@ -108,6 +109,8 @@ const Navbar = () => {
                     >
                        <ShoppingCartIcon />
                     </AnimationLink>
+
+                    <DropdownCart />
 
                     <AuthButton />
 
