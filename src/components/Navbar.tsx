@@ -62,23 +62,6 @@ const Navbar = () => {
         }
     }, [isSignedIn])
 
-    //console.log("UserState:", userState)
-    /*     <div className=" h-fit w-fit "
-        onMouseEnter={() => setOpen(true)}
-        onMouseLeave={() => setOpen(false)}
-      >
-        <div className="border border-red-200 relative text-black ">
-          <span
-            style={{
-              transform: open ? "scaleX(1)" : "scaleX(0)"
-            }}
-            className="absolute -bottom-2 -left-2 -right-2 h-1 origin-left rounded-full bg-slate-300 transition-transform duration-300 ease-out"
-          />
-          HomePage
-        </div>
-      </div> */
-
-
     return (
         <nav className='flexBetween top-0 bg-white/50 opacity-100  p-1 min-h-[10vh] shadow-md w-full'>
             <div className='flex justify-center items-center font-semibold text-gray-500  m-2 p-2 text-xl'>

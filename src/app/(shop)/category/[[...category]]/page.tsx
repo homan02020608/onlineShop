@@ -22,7 +22,7 @@ const categoryPage = async ({ params }: { params: Promise<{ category: string }> 
 
     //console.log(categoryItems)
     return (
-        <div className='grid grid-cols-2 md:grid-cols-3 '>
+        <div className='grid grid-cols-2 md:grid-cols-3'>
             {categoryItems.map((item: categoryItem) => (
                 <div key={item.id} className='flexCenter flex-col  m-2   border-2 border-gray-100 shadow-lg rounded-xl md:m-6 bg-white'>
                         <Image src={`/${item.imageUrl}`} height={500} width={500} sizes='100vh' style={{ width: "100%", height: "auto" }} alt='carouselImage01' className='rounded-xl' />

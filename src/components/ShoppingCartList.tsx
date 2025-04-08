@@ -13,29 +13,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/redux/store'
 import { decrease, increase, remove, total } from '@/redux/cartSlice'
 
-const cartList = [
-    { productId: "124", price: "1200", quantity: 2, },
-    { productId: "125", price: "1200", quantity: 3, },
-    { productId: "126", price: "1200", quantity: 4, },
-    { productId: "127", price: "1200", quantity: 2, },
-    { productId: "128", price: "1200", quantity: 3, },
-    { productId: "129", price: "1200", quantity: 4, },
-    { productId: "130", price: "1200", quantity: 2, },
-    { productId: "131", price: "1200", quantity: 3, },
-    { productId: "132", price: "1200", quantity: 4, },
-    { productId: "133", price: "1200", quantity: 2, },
-    { productId: "134", price: "1200", quantity: 3, },
-    { productId: "135", price: "1200", quantity: 4, },
-    { productId: "136", price: "1200", quantity: 2, },
-    { productId: "137", price: "1200", quantity: 3, },
-    { productId: "138", price: "1200", quantity: 4, },
-]
-
-interface CardList {
-    productId: string
-    price: string
-    quantity: number
-}
 
 interface CardItem {
     productId: string
