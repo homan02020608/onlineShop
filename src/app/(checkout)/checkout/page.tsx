@@ -7,6 +7,8 @@ import {
     EmbeddedCheckoutProvider
   } from '@stripe/react-stripe-js'
 import CheckoutPage from '@/components/CheckoutPage'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/redux/store'
 
 
 
@@ -18,7 +20,8 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
 const page = () => {
 
-    const amount = 50;
+    const amount = useSelector((state : RootState) =>  state.cart.amount)
+
     return (
         <div className='flex flex-col p-4 m-4 bg-slate-100 mx-auto max-w-6xl '>
             <div className='mb-10'>

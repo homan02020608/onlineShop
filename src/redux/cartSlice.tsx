@@ -16,22 +16,22 @@ export const cartSlice = createSlice({
             const cartItem: any = state.cart.find((item: { productId: string }) => item.productId === action.payload.productId)
             if (cartItem) {
                 cartItem.quantity += 1
-                state.total += 1200
+                state.amount += 1200
 
             } else {
                 state.cart.push(action.payload)
-                state.total += 1200
+                state.amount += 1200
             }
         },
         decrease: (state, action: PayloadAction<any>) => {
             const cartItem: any = state.cart.find((item: { productId: string }) => item.productId === action.payload.productId)
             if (cartItem && cartItem.quantity > 1) {
                 cartItem.quantity -= 1
-                state.total -= 1200
+                state.amount -= 1200
             }
         },
-        remove: (state, action) => {
-            state.total -= action.payload.quantity * 1200
+        remove: (state, action: PayloadAction<any>) => {
+            state.amount -= action.payload.quantity * 1200
             state.cart = state.cart.filter((item: { productId: string }) => item.productId !== action.payload.productId)
 
         },
@@ -39,7 +39,7 @@ export const cartSlice = createSlice({
             let sum = 0
 
             state.cart.map((item: { quantity: number }) => (
-                state.total += item.quantity * 1200
+                state.amount += item.quantity * 1200
             ))
         }
     }

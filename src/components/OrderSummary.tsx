@@ -5,7 +5,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 const OrderSummary = () => {
-    const cartTotal = useSelector((state : RootState) => state.cart.total)
+    const amount = useSelector((state : RootState) => state.cart.amount)
     
     return (
         <div >
@@ -14,7 +14,7 @@ const OrderSummary = () => {
                 <div className='flex-col p-4  *:flexBetween w-full'>
                     <div className='gap-x-10'>
                         <div>Total:</div>
-                        <div>￥{cartTotal}</div>
+                        <div>￥{amount}</div>
                     </div>
                     <div className='gap-x-10'>
                         <div>Shipping:</div>
@@ -30,7 +30,7 @@ const OrderSummary = () => {
                     </div>
 
                     <div>
-                        <Link href="/" className='flexCenter bg-black/80 text-white rounded-none w-full px-2 my-4 hover:bg-black/60 '> CheckOut </Link>
+                        <Link href="/checkout" className='flexCenter bg-black/80 text-white rounded-none w-full px-2 my-4 hover:bg-black/60 '> CheckOut </Link>
                     </div>
                 </div>
             </div>
