@@ -2,8 +2,10 @@ import React from 'react'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Link from 'next/link';
 
-const PaymentSuccessPage = () => {
+const PaymentSuccessPage = async () => {
   //{ searchParams : {amount} }: { searchParams: {amount : number}}
+  //{ searchParams : {payment_intent} }: { searchParams: {payment_intent : string}}
+  
   return (
     <div className='flexCenter flex-col  h-[50vh] gap-4'>
       <div><CheckCircleIcon fontSize='large'/></div>

@@ -22,6 +22,7 @@ const Navbar = () => {
     const { isSignedIn, user } = useUser();
 
     const userState = useSelector((state: RootState) => state.user.user)
+    const cartState = useSelector((state : RootState) => state.cart.cart)
 
     const dispatch = useDispatch();
 
@@ -43,6 +44,10 @@ const Navbar = () => {
                 update_At: new Date()
             })
             console.log("success add data")
+            /* await setDoc(doc(db,"user", `${user?.id}`,"orderHistory",`${user?.id}-03`),{
+                order: {cartState}
+            }) */
+            
         }
         dispatch(signIn({
             id: user?.id,
