@@ -9,6 +9,7 @@ import {
 import CheckoutPage from '@/components/CheckoutPage'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/redux/store'
+import AddressForm from '@/components/AddressForm'
 
 
 
@@ -39,6 +40,7 @@ const page = () => {
                     currency: "jpy"
                 }}
             >
+                <AddressForm/>
                 <CheckoutPage amount={amount}/>
             </Elements>
 

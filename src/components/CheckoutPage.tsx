@@ -7,6 +7,7 @@ import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { db } from "../../firebase/firebase";
+import { v4 } from "uuid"; 
 
 const CheckoutPage = ({ amount }: { amount: number }) => {
     const stripe = useStripe();
@@ -16,10 +17,14 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
     const [clientSecret, setClientSecret] = useState("");
     const [loading, setLoading] = useState(false);
     const cartState = useSelector((state: RootState) => state.cart.cart)
-
+    
     const addToOrderHistory = async () => {
-        await addDoc(collection(db, "user", `${user?.id}`, "orderHistory"), {
-            order: cartState
+        await addDoc(collection(db, "user", `${user?.id}`, "orderHistory"), { 
+            order: cartState,
+            payment:"credit card" , 
+            create_At: new Date(),
+            update_At: new Date(),
+            id: v4()
         })
     }
 
@@ -47,6 +52,7 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
             confirmParams: {
                 return_url: `http://localhost:3000/payment-success?amount=${amount}`,
             },
+            
         })
 
 

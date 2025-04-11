@@ -7,29 +7,29 @@ import Link from 'next/link'
 
 interface userOrder {
   orderId?: string
-  created_At?: any
+  create_At?: any
   address?: string
   id?: string
 }
 
 const page = async () => {
   //R0WUzpV9X7wtVVJncTlK
-  const userOrderSnapshot = await getDocs(collection(db, "user", "userInfo", "orderHistory"))
+  const userOrderSnapshot = await getDocs(collection(db, "user", "user_2sySUESJKtYHIaBQV9E4As0F5bV", "orderHistory"))
   const userOrders = userOrderSnapshot.docs.map((doc) => ({
-    ...doc.data(), id: doc.id 
+    ...doc.data() 
   }))
-  //console.log(userOrders)
+  console.log(userOrders)
   return (
     <div className='flex flex-col gap-10 p-2 m-4  '>
       <h1 className='flexCenter'>Your Order</h1>
       <div>
         <div className='flex flex-col  border border-gray-100 p-2 m-4 gap-4 min-w-[300px] md:w-[500px]'>
           {userOrders.map((order: userOrder) => (
-            <div key={order.orderId} className='flex flex-col  text-sm md:text-base p-4 m-4 border-y border-gray-300 gap-8 *:flex *:flex-col '>
-              <div className=''>注文番号:<span>{order.orderId}</span>
+            <div key={order.id} className='flex flex-col  text-sm md:text-base p-4 m-4 border-y border-gray-300 gap-8 *:flex *:flex-col '>
+              <div className=''>注文番号:<span>{order.id}</span>
               </div>
-              <div>注文日時:<span>{order.created_At.toDate().toLocaleString()}</span></div>
-              <Link href={`/user/userOrder/orderDetails/${order.orderId}`} className='flexCenter border border-gray-200  p-2 hover:bg-gray-100 rounded-full'>注文詳細</Link>
+              {/* <div>注文日時:<span>{order.create_At}</span></div> */}
+              <Link href={`/user/userOrder/orderDetails/${order.id}`} className='flexCenter border border-gray-200  p-2 hover:bg-gray-100 rounded-full'>注文詳細</Link>
             </div>
           ))} 
         </div>

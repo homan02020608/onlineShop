@@ -93,7 +93,7 @@ const ProductCard = ({ title, productId, category, price , bookmarked , imageUrl
                     </CardContent>
                     <CardFooter className='mt-10'>
                         {/* <button className='w-full m-2 p-4 bg-sky-200 rounded-full hover:bg-sky-100' onClick={() => dispatch(addtoCart({title, productId ,quantity}))}>カートに入れる</button> */}
-                        <button className='w-full m-2 p-4 bg-sky-200 rounded-full hover:bg-sky-100' onClick={() => dispatch(increase({ title, productId, quantity }))}>カートに入れる</button>
+                        <button className='w-full m-2 p-4 bg-sky-200 rounded-full hover:bg-sky-100' onClick={() => dispatch(increase({ title, productId, quantity ,price}))}>カートに入れる</button>
                     </CardFooter>
                 </Card>
             </div>

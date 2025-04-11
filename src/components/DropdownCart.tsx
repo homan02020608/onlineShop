@@ -12,7 +12,7 @@ interface CardItem {
 }
 
 const DropdownCart = () => {
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
     const cartItems = useSelector((state: RootState) => state.cart);
     const dispatch = useDispatch();
 
