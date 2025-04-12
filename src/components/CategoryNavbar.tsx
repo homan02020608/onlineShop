@@ -20,7 +20,7 @@ interface categoryItems {
 
 const CategoryNavbar = () => {
     return (
-        <div className=' gap-2 max-container md:flexCenter md:flex-row md:p-2 md: rounded-3xl '>
+        <div className='gap-2 max-container md:flexCenter md:flex-row md:p-2 md:rounded-3xl '>
             {CATEGORY_NAV.map((category:categoryItems) => (
                 <div className='hidden md:flex ' key={`${category.column}`}>
                     <NavigationMenu>

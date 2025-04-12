@@ -8,8 +8,6 @@ export default function Home() {
         <CategoryNavbar />
       </div>
       <MultiCarousel />
-
-
     </div>
   );
 }

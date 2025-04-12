@@ -15,7 +15,7 @@ const page = async () => {
     
     return (
         <div className='flexCenter flex-col  p-2 gap-10'>
-            <h1 className=''>Your Order</h1>
+            <h1 className=''>お気に入り</h1>
             <div className='grid grid-cols-2 md:grid-cols-3'>
                 {favouriteProducts.map((item: any) => (
                     <div key={item.id} className='flexCenter flex-col  m-2   border-2 border-gray-100 shadow-lg rounded-xl md:m-6 bg-white'>

@@ -41,7 +41,7 @@ const page = async ({ params }: { params: Promise<{ orderId: string }> }) => {
   const docSnap = await getDoc(docRef);
   const detailData1 = [docSnap.data()]
    */
-  console.log(orderDetails)
+  //console.log(orderDetails)
   return (
     <div className='flex flex-col w-full border border-gray-200 p-2 m-2'>
       <h1>注文詳細</h1>

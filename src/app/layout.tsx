@@ -30,12 +30,12 @@ export default function RootLayout({
     <ClerkProvider afterSignOutUrl="/">
       <html lang="en">
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased  flex flex-col min-h-screen`}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen `}
         >
           <StoreProvider>
             <Navbar />
             {children}
-            <Footer/>
+            <Footer />
           </StoreProvider>
         </body>
       </html>

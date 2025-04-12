@@ -18,7 +18,7 @@ const page = async () => {
   const userOrders = userOrderSnapshot.docs.map((doc) => ({
     ...doc.data() 
   }))
-  console.log(userOrders)
+  //console.log(userOrders)
   return (
     <div className='flex flex-col gap-10 p-2 m-4  '>
       <h1 className='flexCenter'>Your Order</h1>

@@ -90,15 +90,11 @@ const Navbar = () => {
                     >
                         <FavoriteIcon />
                     </AnimationLink>
-
-                    <AnimationLink 
-                        href="/shoppingCart"
-                        title='カート'
-                    >
-                       <ShoppingCartIcon />
-                    </AnimationLink>
-
-                    <DropdownCart />
+       
+                    <Link href="/"className='flexCenter flex-col p-2 rounded-2xl  text-sm  whitespace-nowrap ' >
+                        <DropdownCart/>
+                    </Link>
+                    
 
                     <AuthButton />
 
