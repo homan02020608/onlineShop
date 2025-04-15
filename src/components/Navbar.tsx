@@ -1,12 +1,11 @@
 "use client"
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MenuIcon from '@mui/icons-material/Menu';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import SearchIcon from '@mui/icons-material/Search';
 import AuthButton from './AuthButton';
-import { useUser } from '@clerk/nextjs';
+import { SignInButton, SignOutButton, useUser } from '@clerk/nextjs';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { signIn, signOut } from '@/redux/userSlice';
@@ -15,17 +14,24 @@ import { db } from '../../firebase/firebase';
 import AnimationLink from './AnimationLink';
 import DropdownCart from './DropdownCart';
 
+const menuInfo = [
+    { path: '/news', key: "news", label: "ニュース" },
+    { path: '/category', key: "category", label: "カテゴリ" },
+    { path: '/guide', key: "guide", label: "利用ガイド" },
+    { path: '/help', key: "help", label: "ヘルプ" },
+]
+
+
 const Navbar = () => {
 
     const [open, setOpen] = useState(false);
-
-    const { isSignedIn, user } = useUser();
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const userState = useSelector((state: RootState) => state.user.user)
-    const cartState = useSelector((state : RootState) => state.cart.cart)
+    const cartState = useSelector((state: RootState) => state.cart.cart)
 
     const dispatch = useDispatch();
-
+    const { isSignedIn, user } = useUser();
 
     const fetchUserInfo = async () => {
         const userSnapShot = await getDocs(query(collection(db, 'user'), where("userId", "==", `${user?.id}`)))
@@ -47,7 +53,7 @@ const Navbar = () => {
             /* await setDoc(doc(db,"user", `${user?.id}`,"orderHistory",`${user?.id}-03`),{
                 order: {cartState}
             }) */
-            
+
         }
         dispatch(signIn({
             id: user?.id,
@@ -67,16 +73,17 @@ const Navbar = () => {
         }
     }, [isSignedIn])
 
+
     return (
-        <nav className='flexBetween top-0 bg-white/50 opacity-100  p-1 min-h-[10vh] shadow-md w-full'>
+        <nav className='flexBetween top-0 bg-white/50 opacity-100 p-1 min-h-[10vh] shadow-md w-full relative'>
             <div className='flex justify-center items-center font-semibold text-gray-500  m-2 p-2 text-xl'>
                 <Link href="/">
                     WebShop
                 </Link>
             </div>
 
-            <div className='flexCenter p-2 pr-10 left-0 '>
-                <div className='flex gap-2 font-normal text-gray-500 md:gap-6 lg:gap-10'>
+            <div className='flexCenter p-2 left-0 lg:pr-10  '>
+                <div className='flex gap-2 font-normal text-gray-500 md:gap-4 lg:gap-6'>
                     <div className='hidden md:flex duration-500'>
                         <div className='flexCenter bg-slate-100 min-w-[10px] max-w-2xl h-[50px] rounded-full relative hidden md:min-w-[250px]'>
                             <input type="text" className='w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-md border border-slate-200 rounded-full pl-4 py-3 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 ' placeholder='キーワードを入力' />
@@ -84,24 +91,57 @@ const Navbar = () => {
                         </div>
                     </div>
 
-                    <AnimationLink 
+                    <AnimationLink
                         href="/user/userFavourite"
                         title='気に入り'
                     >
                         <FavoriteIcon />
                     </AnimationLink>
-       
-                    <Link href="/"className='flexCenter flex-col p-2 rounded-2xl  text-sm  whitespace-nowrap ' >
-                        <DropdownCart/>
+
+                    <Link href="/shoppingCart" className='flexCenter flex-col p-2 rounded-2xl  text-sm  whitespace-nowrap ' >
+                        <DropdownCart />
                     </Link>
-                    
+
 
                     <AuthButton />
 
-                    <Link href="/" className='flexCenter flex-col bg-slate-200 px-2 rounded-full' >
-                        <MenuIcon />
-                    </Link>
+                    <div className='flexCenter md:hidden px-2 rounded-full border border-red-100 hover:cursor-pointer '>
+                        <MenuIcon onClick={() => setIsMenuOpen(!isMenuOpen)} />
+                    </div>
+
+
                 </div>
+                <div
+                    className={`absolute flexCenter flex-col md:hidden text-lg text-black  right-0 top-24  bg-white gap-6 font-light transform transition-transform z-50 w-full ${isMenuOpen ? "opacity-100" : "opacity-0"}`}
+                    style={{ transition: "transform 0.3s ease , opacity 0.3s ease" }}
+                >
+                    {menuInfo.map((info) => (
+                        <Link href={info.path} key={info.key} className='w-full p-2 text-center hover:bg-slate-100  transition-all'>{info.label}</Link>
+                    ))}
+
+                    {isSignedIn ?
+                        <div className='flexCenter flex-col text-center w-full  '>
+                            <Link href="/user" className='w-full p-2 text-center hover:bg-slate-100  transition-all'>マイページ</Link>
+                        </div>
+                        :
+                        <div className='flexCenter  w-full gap-4 m-2'>
+                            <SignInButton mode='modal'>
+                                <div className=' p-2 text-center border px-8 rounded-full border-gray-200 hover:bg-slate-100  transition-all'>ログイン</div>
+                            </SignInButton>
+
+                            <Link href="/sign-up" className=' p-2 text-center border px-8 rounded-full border-gray-200 hover:bg-slate-100  transition-all'>新規登録</Link>
+                        </div>
+                    }
+
+                    {isSignedIn &&
+                        <div className='flexCenter flex-col text-center w-full p-2 hover:bg-slate-100  transition-all '>
+                            <SignOutButton >
+                                ログアウト
+                            </SignOutButton>
+                        </div>
+                    }
+                </div>
+
             </div>
         </nav>
     )

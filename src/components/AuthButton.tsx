@@ -29,7 +29,9 @@ const AuthButton = () => {
                         />
                     </div>
                 </Link>
-                <SignOutButton />
+                <div className='hidden md:flexCenter '>
+                    <SignOutButton />
+                </div>
             </SignedIn>
 
             {/* ログイン前 */}

@@ -24,6 +24,7 @@ const DropdownCart = () => {
             onMouseLeave={() => setOpen(false)}
         >
             <ShoppingCartIcon/>
+           
 
             <div className='hidden md:flex'>カート</div>
 
@@ -33,7 +34,7 @@ const DropdownCart = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 0 }}
                     style={{ translateX: "-50%" }}
-                    className='absolute top-12 z-30 left-1/2  bg-slate-200 text-black'
+                    className='hidden md:flex absolute top-12 z-30 left-1/2  bg-slate-200 text-black'
                 >
                     <div className='absolute -top-6 left-0 right-0 h-2 bg-transparent ' />
                     <div className='absolute left-1/2 top-0 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-slate-200' />

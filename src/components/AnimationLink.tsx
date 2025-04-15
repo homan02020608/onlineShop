@@ -13,12 +13,12 @@ const AnimationLink = ({ children, href ,title }: AnimationLinkProps) => {
     return (
         <Link
             href={href}
-            className='flexCenter flex-col p-2 rounded-2xl  text-sm  whitespace-nowrap '
+            className='hidden md:flexCenter flex-col p-2 rounded-2xl  text-sm  whitespace-nowrap '
             onMouseEnter={() => setOpen(true)}
             onMouseLeave={() => setOpen(false)}
         >
             {children}
-            <div className='hidden md:flex relative'>
+            <div className='flex relative'>
                 <span
                     style={{transform : open ? "scaleX(1)" : "scaleX(0)"}}
                     className='absolute -bottom-2 -left-2 -right-2 h-1 origin-left rounded-full bg-slate-300 transition-transform duration-300 ease-out'

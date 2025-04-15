@@ -43,7 +43,7 @@ const MultiCarousel = () => {
 
 
   return (
-    <div className='bg-white/50 max-container'>
+    <div className='bg-white/50 max-container -z-[100]'>
       <Carousel
         responsive={responsive}
         showDots={true}
