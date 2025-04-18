@@ -30,7 +30,17 @@ export const CATEGORY_NAV = [
         menu: [
             {item: "生写真", path:"/photos"},
             {item: "グッズ", path:"/goods"},
+            {item: "スマートフォン", path:"/smartphone"},
+            {item: "パソコン", path: "/computer"},
+            {item: "イヤホン", path: "/earphones"},
         ]
     },
     { column:"利用ガイド" },
+]
+
+export const NAV_MENU = [
+    { path: '/news', key: "news", label: "ニュース" },
+    { path: '/category', key: "category", label: "カテゴリ" },
+    { path: '/guide', key: "guide", label: "利用ガイド" },
+    { path: '/help', key: "help", label: "ヘルプ" },
 ]

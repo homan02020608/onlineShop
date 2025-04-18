@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/redux/store'
 import { decrease, increase } from '@/redux/cartSlice'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import Link from 'next/link'
 
 interface CardItem {
     productId: string
@@ -23,10 +24,11 @@ const DropdownCart = () => {
             onMouseEnter={() => setOpen(true)}
             onMouseLeave={() => setOpen(false)}
         >
-            <ShoppingCartIcon/>
-           
+            <Link href="/shoppingCart" className='flexCenter flex-col'>
+                <ShoppingCartIcon />
+                <div className='hidden md:flex'>カート</div>
+            </Link>
 
-            <div className='hidden md:flex'>カート</div>
 
             {open && (
                 <motion.div

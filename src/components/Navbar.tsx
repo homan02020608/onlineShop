@@ -13,13 +13,9 @@ import { collection, doc, getDocs, query, setDoc, where } from 'firebase/firesto
 import { db } from '../../firebase/firebase';
 import AnimationLink from './AnimationLink';
 import DropdownCart from './DropdownCart';
+import { NAV_MENU } from '../../constants';
 
-const menuInfo = [
-    { path: '/news', key: "news", label: "ニュース" },
-    { path: '/category', key: "category", label: "カテゴリ" },
-    { path: '/guide', key: "guide", label: "利用ガイド" },
-    { path: '/help', key: "help", label: "ヘルプ" },
-]
+
 
 
 const Navbar = () => {
@@ -98,9 +94,9 @@ const Navbar = () => {
                         <FavoriteIcon />
                     </AnimationLink>
 
-                    <Link href="/shoppingCart" className='flexCenter flex-col p-2 rounded-2xl  text-sm  whitespace-nowrap ' >
+                    <div className='flexCenter flex-col p-2 rounded-2xl  text-sm  whitespace-nowrap ' >
                         <DropdownCart />
-                    </Link>
+                    </div>
 
 
                     <AuthButton />
@@ -111,11 +107,13 @@ const Navbar = () => {
 
 
                 </div>
+
+                {/* Responsive Nav Menu (mobile)  */}
                 <div
                     className={`absolute flexCenter flex-col md:hidden text-lg text-black  right-0 top-24  bg-white gap-6 font-light transform transition-transform z-50 w-full ${isMenuOpen ? "opacity-100" : "opacity-0"}`}
                     style={{ transition: "transform 0.3s ease , opacity 0.3s ease" }}
                 >
-                    {menuInfo.map((info) => (
+                    {NAV_MENU.map((info) => (
                         <Link href={info.path} key={info.key} className='w-full p-2 text-center hover:bg-slate-100  transition-all'>{info.label}</Link>
                     ))}
 
