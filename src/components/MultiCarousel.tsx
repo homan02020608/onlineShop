@@ -10,10 +10,8 @@ const sliderImage = [
   "carouselImage02",
   "carouselImage03",
   "carouselImage04",
-  "carouselImage01",
-  "carouselImage02",
-  "carouselImage03",
-  "carouselImage04",
+  "iphone16pro_black",
+  "iphone16pro_white",
 
 ] 
 

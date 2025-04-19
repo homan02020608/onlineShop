@@ -29,7 +29,7 @@ const CategoryNavbar = () => {
                                 <NavigationMenuTrigger className=''>{category.column}</NavigationMenuTrigger>
                                 <NavigationMenuContent className='flex flex-col duration-500'>
                                   {category.menu?.map(({ item, path } : {item:string, key:string, path:string})=> (
-                                     <Link href={`/category/${path}`} key={`${category.column}-${item}`} className='whitespace-nowrap my-2 p-4 hover:text-slate-400 hover:border-purple-200 hover:border-b-2 '>{item}</Link>
+                                     <Link href={`${path}`} key={`${category.column}-${item}`} className='whitespace-nowrap my-2 p-4 hover:text-slate-400 hover:border-purple-200 hover:border-b-2 '>{item}</Link>
                                   ))}
                                 </NavigationMenuContent>
                             </NavigationMenuItem>
