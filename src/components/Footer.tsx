@@ -14,7 +14,6 @@ const Footer = () => {
         <ul className='*:p-4'>
           <li className='hover:underline hover:cursor-pointer'>よくある質問 </li>
           <li className='hover:underline hover:cursor-pointer'>問い合わせ</li>
-
         </ul>
 
       </div>
