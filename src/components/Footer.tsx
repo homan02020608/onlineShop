@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 const Footer = () => {
@@ -13,7 +14,7 @@ const Footer = () => {
         {/* Contact us */}
         <ul className='*:p-4'>
           <li className='hover:underline hover:cursor-pointer'>よくある質問 </li>
-          <li className='hover:underline hover:cursor-pointer'>問い合わせ</li>
+          <Link href="/contact" className='hover:underline hover:cursor-pointer'>問い合わせ</Link>
         </ul>
 
       </div>

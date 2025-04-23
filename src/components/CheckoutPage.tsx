@@ -44,6 +44,7 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
             return;
         }
 
+        //トランザクション在庫チェック
         addToOrderHistory()
 
         const { error } = await stripe.confirmPayment({

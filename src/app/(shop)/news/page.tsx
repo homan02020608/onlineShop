@@ -2,6 +2,7 @@ import { collection, getDocs } from 'firebase/firestore'
 import React from 'react'
 import { db } from '../../../../firebase/firebase'
 import Link from 'next/link';
+import PurchaseButton from '@/components/PurchaseButton';
 
 interface newsInfo {
   Id: string;
@@ -29,6 +30,7 @@ const page = async() => {
           </Link>
         ))}
       </div>
+      <PurchaseButton />
     </div>
   )
 }
