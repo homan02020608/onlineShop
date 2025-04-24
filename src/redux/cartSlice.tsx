@@ -14,24 +14,28 @@ export const cartSlice = createSlice({
     reducers: {
         increase: (state, action: PayloadAction<any>) => {
             const cartItem: any = state.cart.find((item: { productId: string }) => item.productId === action.payload.productId)
-            if (cartItem) {
-                cartItem.quantity += 1
-                state.amount += 1200
-
-            } else {
+            if (!cartItem) {
                 state.cart.push(action.payload)
-                state.amount += 1200
+                state.amount += action.payload.price * action.payload.quantity
+
+
+            } else if(cartItem && action.payload.quantity && action.payload.price) {
+                cartItem.quantity += action.payload.quantity
+                state.amount += action.payload.price * action.payload.quantity
+            } else {
+                cartItem.quantity += 1
+                state.amount += action.payload.price
             }
         },
         decrease: (state, action: PayloadAction<any>) => {
             const cartItem: any = state.cart.find((item: { productId: string }) => item.productId === action.payload.productId)
             if (cartItem && cartItem.quantity > 1) {
                 cartItem.quantity -= 1
-                state.amount -= 1200
+                state.amount -= action.payload.price
             }
         },
         remove: (state, action: PayloadAction<any>) => {
-            state.amount -= action.payload.quantity * 1200
+            state.amount -= action.payload.quantity * action.payload.price
             state.cart = state.cart.filter((item: { productId: string }) => item.productId !== action.payload.productId)
 
         },

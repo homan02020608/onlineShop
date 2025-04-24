@@ -9,7 +9,7 @@ const OrderSummary = () => {
     
     return (
         <div >
-            <div className='flexCenter flex-col border border-gray-400 p-2 mx-4 whitespace-nowrap w-full md:w-[400px] '>
+            <div className='flex flex-col border border-gray-400 p-2 mx-4 whitespace-nowrap w-full md:w-[400px] '>
                 <h1 className='font-medium text-xl m-2 '>Order Summary</h1>
                 <div className='flex-col p-4  *:flexBetween w-full'>
                     <div className='gap-x-10'>
@@ -30,7 +30,7 @@ const OrderSummary = () => {
                     </div>
 
                     <div>
-                        <Link href="/checkout" className='flexCenter bg-black/80 text-white rounded-none w-full px-2 my-4 hover:bg-black/60 '> CheckOut </Link>
+                        <Link href="/checkout" className={`flexCenter bg-black/80 text-white rounded-none w-full px-2 my-4 hover:bg-black/60 ${amount === 0 && "pointer-events-none"}`}> CheckOut </Link>
                     </div>
                 </div>
             </div>

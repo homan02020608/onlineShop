@@ -109,12 +109,13 @@ const Navbar = () => {
                 </div>
 
                 {/* Responsive Nav Menu (mobile)  */}
+                
                 <div
-                    className={`absolute flexCenter flex-col md:hidden text-lg text-black  right-0 top-24  bg-white gap-6 font-light transform transition-transform z-50 w-full ${isMenuOpen ? "opacity-100" : "opacity-0"}`}
+                    className={`absolute flexCenter flex-col md:hidden  text-lg text-black z-50 right-0 top-24  bg-white gap-6 font-light transform transition-transform w-full ${isMenuOpen ? "opacity-100" : "opacity-0  pointer-events-none"}`}
                     style={{ transition: "transform 0.3s ease , opacity 0.3s ease" }}
                 >
                     {NAV_MENU.map((info) => (
-                        <Link href={info.path} key={info.key} className='w-full p-2 text-center hover:bg-slate-100  transition-all'>{info.label}</Link>
+                        <Link href={info.path} key={info.key} className='w-full p-2 text-center hover:bg-slate-100  transition-all' onClick={() => setIsMenuOpen(!isMenuOpen)}>{info.label}</Link>
                     ))}
 
                     {isSignedIn ?
@@ -139,6 +140,7 @@ const Navbar = () => {
                         </div>
                     }
                 </div>
+                
 
             </div>
         </nav>

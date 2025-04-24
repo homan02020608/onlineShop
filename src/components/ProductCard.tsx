@@ -18,7 +18,7 @@ import {
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import StarRateIcon from '@mui/icons-material/StarRate';
-import { Timestamp, collection, doc, getDocs, query, setDoc, updateDoc, where } from 'firebase/firestore';
+import { Timestamp, doc, updateDoc } from 'firebase/firestore';
 
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
@@ -29,33 +29,33 @@ import { db } from '../../firebase/firebase';
 
 
 interface ProductInfoProps {
-    timestamp?: Timestamp
     title: string
     productId: string
     category: string
-    imageUrl : string
+    imageUrl: string
     price: number
-    bookmarked:boolean
-    id:string
+    bookmarked: boolean
+    id: string
+    update_At?: Timestamp
+    create_At?: Timestamp
 }
 
-const ProductCard = ({ title, productId, category, price , bookmarked , imageUrl ,id}: ProductInfoProps) => {
+const ProductCard = ({ title, productId, category, price, bookmarked, imageUrl, id }: ProductInfoProps) => {
     const dispatch = useDispatch()
-    const quantity = 1
-    const [bookmark, setBookmark] = useState(bookmarked)
+    const [quantity, setQuantity] = useState<number>(0);
+    const [bookmark, setBookmark] = useState<boolean>(bookmarked)
     const updateBookmarkItem = async () => {
-        await updateDoc(doc(db, "products" , `${id}`), {
-            bookmark : !bookmark
+        await updateDoc(doc(db, "products", `${id}`), {
+            bookmark: !bookmark
         })
         console.log("success")
     }
     const updateBookmark = () => {
         updateBookmarkItem()
         setBookmark(!bookmark)
-        
+
     }
 
-    //console.log(bookmarked)
     return (
         <div className='flexCenter md:flex-row gap-2 flex-col lg:gap-20 '>
             <div className='flexCenter  w-[600px] p-8'>
@@ -75,25 +75,25 @@ const ProductCard = ({ title, productId, category, price , bookmarked , imageUrl
                         <p><span className='font-semibold'>商品番号:</span> {productId}</p>
                     </CardContent>
                     <CardContent>￥{price}(税込)</CardContent>
-                    <CardContent onClick={() => updateBookmark() }>
-                        { bookmark ? <FavoriteIcon/> : <FavoriteBorderIcon /> }
+                    <CardContent onClick={() => updateBookmark()}>
+                        {bookmark ? <FavoriteIcon /> : <FavoriteBorderIcon />}
                         Bookmark State: {String(bookmarked)}
                     </CardContent>
                     <CardContent>
-                        <Select>
+                        <Select onValueChange={(value) => setQuantity(Number(value))}>
                             <SelectTrigger className="w-[100px]">
                                 <SelectValue placeholder="0" />
                             </SelectTrigger>
                             <SelectContent>
                                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((selected) => (
-                                    <SelectItem value={String(selected)} key={`selected-${selected}`}>{selected}</SelectItem>
+                                    <SelectItem value={String(selected)} key={`selected-${selected}`} >{selected}</SelectItem>
                                 ))}
                             </SelectContent>
                         </Select>
                     </CardContent>
                     <CardFooter className='mt-10'>
                         {/* <button className='w-full m-2 p-4 bg-sky-200 rounded-full hover:bg-sky-100' onClick={() => dispatch(addtoCart({title, productId ,quantity}))}>カートに入れる</button> */}
-                        <button className='w-full m-2 p-4 bg-sky-200 rounded-full hover:bg-sky-100' onClick={() => dispatch(increase({ title, productId, quantity ,price}))}>カートに入れる</button>
+                        <button className='w-full m-2 p-4 bg-sky-200 rounded-full hover:bg-sky-100' onClick={() => dispatch(increase({ title, productId, quantity, price }))}>カートに入れる</button>
                     </CardFooter>
                 </Card>
             </div>

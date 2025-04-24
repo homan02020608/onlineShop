@@ -20,7 +20,7 @@ const page = async ({ params }: { params: Promise<{ category: string }> }) => {
   const categorySnapShot = categoryQuery.docs.map((doc) => ({
     ...doc.data(),id: doc.id
   }))
-  console.log(categorySnapShot)
+
   return (
     <div className='grid grid-cols-2 md:grid-cols-3'>
     {categorySnapShot.map((item: categoryItem) => (

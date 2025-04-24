@@ -63,14 +63,6 @@ const MultiCarousel = () => {
           </div>
         ))}
       </Carousel>
-      {/*       <div className='flexCenter'>
-        <div className=' p-2'>
-          {sliderImage.map((item, i) => (
-            <button key={`set-${item}-${i}`} className={`p-2 m-2 w-8 border-b-4 border-slate-200 duration-300  ${i === currIndex && "border-red-300"}`} onClick={() => setCurrIndex(i)}></button>
-          ))}
-          <p className='mt-4'>{(currIndex)}</p>
-        </div>
-      </div> */}
     </div>
   )
 }

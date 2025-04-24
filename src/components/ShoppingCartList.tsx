@@ -18,6 +18,7 @@ interface CardItem {
     productId: string
     title: string
     quantity: number
+    price : number
 }
 
 
@@ -25,11 +26,9 @@ interface CardItem {
 const ShoppingCartList = () => {
     const cartItems = useSelector((state: RootState) => state.cart)
     const dispatch = useDispatch()
-    console.log(cartItems.cart)
-    console.log("total", cartItems.total)
 
     return (
-        <div className='flexCenter gap-10 w-full p-4 m-6 '>
+        <div className='flexCenter gap-10 w-full p-2 m-4'>
             <Table className='border-y-2 '>
                 {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
                 <TableHeader className='font-bold '>
@@ -41,26 +40,18 @@ const ShoppingCartList = () => {
                     </TableRow>
                 </TableHeader>
                 <TableBody className=''>
-                    {/*                        {cartList.map(({ productId, price, quantity }: CardList) => (
-                            <TableRow key={productId} > 
-                                <TableCell className="font-medium">Item-{productId}</TableCell>
-                                <TableCell>￥{price}</TableCell>
-                                <TableCell>{quantity}</TableCell>
-                                <TableCell className="text-right">{`¥${Number(price) * quantity}`}</TableCell>
-                            </TableRow>
-                        ))} */}
-                    {cartItems.cart.map(({ productId, title, quantity }: CardItem) => (
+                    {cartItems.cart.map(({ productId, title, quantity , price }: CardItem) => (
                         <TableRow key={`${productId}`}>
                             <TableCell>Item-{productId}</TableCell>
-                            <TableCell>￥1200</TableCell>
+                            <TableCell>￥{price}</TableCell>
                             <TableCell className='flexStart '>
-                                <button className='p-2 m-2 text-xl  border border-gray-200' onClick={() => { dispatch(increase({ productId, quantity })) }}>+</button>
+                                <button className='p-2 m-2 text-xl  border border-gray-200' onClick={() => { dispatch(increase({ productId ,price})) }}>+</button>
                                 {quantity}
-                                <button className='p-2 m-2 text-xl  border border-gray-200' onClick={() => { dispatch(decrease({ productId, quantity })) }}>-</button>
+                                <button className='p-2 m-2 text-xl  border border-gray-200' onClick={() => { dispatch(decrease({ productId , price})) }}>-</button>
                             </TableCell>
-                            <TableCell className="text-right">{`￥${1200 * quantity}`}</TableCell>
+                            <TableCell className="text-right">{`￥${price * quantity}`}</TableCell>
                             <TableCell className='flexCenter'>
-                                <button className='p-2 m-2 text-xl  ' onClick={() => { dispatch(remove({ productId, quantity })) }}>X</button>
+                                <button className='p-2 m-2 text-xl  ' onClick={() => { dispatch(remove({ productId, quantity , price})) }}>X</button>
                             </TableCell>
                         </TableRow>
                     ))}

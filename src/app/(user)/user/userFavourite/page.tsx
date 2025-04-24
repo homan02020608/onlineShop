@@ -12,7 +12,9 @@ const page = async () => {
     const favouriteProducts = querySnapShot.docs.map((doc: any) => ({
         ...doc.data(), id: doc.id
     }))
-    
+
+
+
     return (
         <div className='flexCenter flex-col  p-2 gap-10'>
             <h1 className=''>お気に入り</h1>
@@ -25,7 +27,7 @@ const page = async () => {
                 ))}
             </div>
 
-
+            
 
 
         </div>
