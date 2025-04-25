@@ -29,6 +29,7 @@ const page = async ({ params } : { params : Promise<{product : string}> }) => {
                             price={info.price}
                             bookmarked={info.bookmark}
                             id={info.id}
+                            stock = {info.stock}
                         />
                     ))}
             </div>

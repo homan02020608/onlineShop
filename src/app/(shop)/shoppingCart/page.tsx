@@ -11,7 +11,7 @@ const shoppingCartPage = () => {
         <h1 className='font-semibold text-xl'>Shopping Cart </h1>
       </div>
       <div className='flex justify-center flex-col md:flex-row '>
-        <ShoppingCartList />
+        <ShoppingCartList quantityAllow={true}/>
         <OrderSummary />  
       </div>
     </div>

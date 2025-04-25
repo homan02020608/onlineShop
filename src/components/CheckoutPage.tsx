@@ -4,10 +4,11 @@ import { RootState } from "@/redux/store";
 import { useUser } from "@clerk/nextjs";
 import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import { addDoc, collection, doc, setDoc } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { db } from "../../firebase/firebase";
-import { v4 } from "uuid"; 
+import { v4 } from "uuid";
+import { purchaseCart } from "./PurchaseButton";
 
 const CheckoutPage = ({ amount }: { amount: number }) => {
     const stripe = useStripe();
@@ -15,15 +16,24 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
     const { user } = useUser();
     const [errorMessage, setErrorMessage] = useState<string>();
     const [clientSecret, setClientSecret] = useState("");
+    const [address, setAddress] = useState({});
+    const address1: any[] = [];
     const [loading, setLoading] = useState(false);
     const cartState = useSelector((state: RootState) => state.cart.cart)
-    
+
+    const getAddress = async () => {
+        await elements?.getElement("address")?.getValue().then(function (result) {
+            setAddress(result.value.address)
+        })
+    }
+
     const addToOrderHistory = async () => {
-        await addDoc(collection(db, "user", `${user?.id}`, "orderHistory"), { 
+        await addDoc(collection(db, "user", `${user?.id}`, "orderHistory"), {
             order: cartState,
-            payment:"credit card" , 
+            payment: "credit card",
             create_At: new Date(),
             update_At: new Date(),
+            address: address,
             id: v4()
         })
     }
@@ -44,7 +54,6 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
             return;
         }
 
-        //トランザクション在庫チェック
         addToOrderHistory()
 
         const { error } = await stripe.confirmPayment({
@@ -53,7 +62,7 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
             confirmParams: {
                 return_url: `http://localhost:3000/payment-success?amount=${amount}`,
             },
-            
+
         })
 
 
@@ -103,9 +112,11 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
             <button
                 disabled={!stripe || loading}
                 className="bg-black text-white w-full p-2 rounded-lg "
+                onClick={() => getAddress()}
             >
                 {!loading ? `Pay $${amount}` : "Processing..."}
             </button>
+            
         </form>
     )
 }

@@ -2,19 +2,23 @@
 import { doc, runTransaction } from 'firebase/firestore';
 import React from 'react'
 import { db } from '../../firebase/firebase';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
 
-export async function purchaseCart(testCart: { id: string, quantity: number }[]) {
+export async function purchaseCart(shoppingCart: { id: string, quantity: number }[]) {
     try {
         await runTransaction(db, async (transaction) => {
-            const productRefs = testCart.map((item: any) => ({
-                ref: doc(db, "testItem", item.id),
+            const productRefs = shoppingCart.map((item: any) => ({
+                ref: doc(db, "products", item.id),
                 quantity: item.quantity
             }))
-            console.log("ProductRefs")
+           
 
             const productDocs = await Promise.all(
                 productRefs.map((item) => transaction.get(item.ref))
             );
+
+            
 
             for (let i = 0; i < productDocs.length; i++) {
                 const docSnap = productDocs[i];
@@ -27,7 +31,7 @@ export async function purchaseCart(testCart: { id: string, quantity: number }[])
                 const stock = docSnap.data().stock;
 
                 if (stock < quantity) {
-                    throw new Error(`在庫不足-${docSnap.data().productId}`)
+                    throw new Error(`在庫不足:${docSnap.data().title} もう一度お試しください`)
                 }
             }
 
@@ -45,25 +49,23 @@ export async function purchaseCart(testCart: { id: string, quantity: number }[])
         return { success: true }
 
     } catch (error) {
-        alert(error)
+        //alert(error)
         return { success: false, message: (error as Error).message };
         
     }
 } 
 
-const testCart = [
-    { id: "6P4jkQckzH5Ci0epwV8V", quantity: 1 },
-    { id: "eFEyuJaMiAgwpPMm2XwN", quantity: 1 },
-    { id: "TDNw7DkeQrlPvQ1CqC6k", quantity: 2 },
-]
+
 
 const PurchaseButton = () => {
 
+    const shoppingCart = useSelector((state : RootState) => state.cart.cart)
+    
     const Purchase = () => {
-        purchaseCart(testCart)
+        purchaseCart(shoppingCart)
     }
     return (
-        <button onClick={Purchase} className='p-2 border border-black rounded-xl'>Purchase</button>
+        <button onClick={Purchase} className='p-2 border border-black rounded-xl hover:bg-slate-200'>Purchase</button>
     )
 }
 

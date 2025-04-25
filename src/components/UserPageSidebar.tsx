@@ -5,7 +5,6 @@ const sidebarInfo = [
     { column: "会員情報照会、変更" ,path:"/user/userPage/TestingUser"},
     { column: "お届け先の確認、登録、変更",path:"/user/userOrder"},
     { column: "注文履歴一覧" ,path:"/user/userOrder"},
-    { column: "出荷記録" ,path:"/user/userOrder"},
     { column: "クーポン一覧" ,path:"/user/userOrder"},
     { column: "お気に入り" ,path:"/user/userFavourite"},
 ]

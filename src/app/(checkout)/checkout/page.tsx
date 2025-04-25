@@ -22,13 +22,17 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
 const page = () => {
 
-    //const amount = useSelector((state : RootState) =>  state.cart.amount)
-    const amount = 100
+    let amount = useSelector((state : RootState) =>  state.cart.amount)
+    if (amount >= 5000 ) {
+        amount
+    }else{
+       amount += 330
+    }
 
     return (
         <div className='flex flex-col md:flex-row md:w-full p-4 m-4 gap-10 mx-auto max-w-6xl '>
             <div className=' w-full md:w-2/3'>
-                <ShoppingCartList/>
+                <ShoppingCartList quantityAllow={false}/>
             </div>
             <div className='bg-slate-100 w-full md:w-1/3 p-4 '>
                 <div className='mb-10'>

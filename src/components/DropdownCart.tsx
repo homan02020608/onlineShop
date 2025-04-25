@@ -43,7 +43,7 @@ const DropdownCart = () => {
                     <div className='absolute left-1/2 top-0 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-slate-200' />
                     <div className='flex flex-col justify-start h-96 w-96 p-4 shadow-xl overflow-scroll gap-6'>
                         {cartItems.cart.map(({ productId, quantity, title, price }: CardItem) => (
-                            <div key={productId} className='flex flex-row whitespace-normal text-sm' >
+                            <div key={productId} className='flexCenter flex-row whitespace-normal text-sm' >
                                 <div>{title}</div>
                                 <div className=' whitespace-nowrap'>
                                     <button className='p-2 m-2  border border-gray-500' onClick={() => { dispatch(increase({ productId, price })) }}>+</button>
