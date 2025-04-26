@@ -3,8 +3,6 @@ import React from 'react'
 import { loadStripe } from "@stripe/stripe-js"
 import {
     Elements,
-    EmbeddedCheckout,
-    EmbeddedCheckoutProvider
 } from '@stripe/react-stripe-js'
 import CheckoutPage from '@/components/CheckoutPage'
 import { useSelector } from 'react-redux'
@@ -23,6 +21,7 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 const page = () => {
 
     let amount = useSelector((state : RootState) =>  state.cart.amount)
+    
     if (amount >= 5000 ) {
         amount
     }else{

@@ -1,17 +1,5 @@
 "use client"
-import React, { useRef, useState } from 'react'
-import { Button } from "@/components/ui/button"
-import {
-    Form,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { SubmitHandler, useForm } from 'react-hook-form'
+import React, { useRef } from 'react'
 
 interface ContactFormInfo {
     name: string
@@ -23,7 +11,6 @@ interface ContactFormInfo {
 
 const ContactForm = () => {
 
-    const { register, handleSubmit } = useForm<ContactFormInfo>()
     const nameRef = useRef<HTMLInputElement>(null)
     const emailRef = useRef<HTMLInputElement>(null)
     const messageRef = useRef<HTMLTextAreaElement>(null)
@@ -31,7 +18,7 @@ const ContactForm = () => {
     const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        let data = {
+        const data = {
             name : nameRef.current?.value,
             email : emailRef.current?.value,
             message : messageRef.current?.value,

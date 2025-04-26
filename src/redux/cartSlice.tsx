@@ -1,8 +1,18 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-interface CounterState {
-    value: number
+
+/* interface InitialCartState {
+    cart : [
+        null | {
+            id:string
+            title:string
+            productId:string 
+            quantity:number 
+            price :number
+        }
+    ]
 }
+const initialCart : InitialCartState [] = [] */
 
 export const cartSlice = createSlice({
     name: 'cart',
@@ -39,13 +49,6 @@ export const cartSlice = createSlice({
             state.cart = state.cart.filter((item: { productId: string }) => item.productId !== action.payload.productId)
 
         },
-        total: (state) => {
-            let sum = 0
-
-            state.cart.map((item: { quantity: number }) => (
-                state.amount += item.quantity * 1200
-            ))
-        }
     }
 })
 

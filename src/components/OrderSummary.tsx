@@ -1,6 +1,5 @@
 "use client"
 import { RootState } from '@/redux/store'
-import Link from 'next/link'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { purchaseCart } from './PurchaseButton'

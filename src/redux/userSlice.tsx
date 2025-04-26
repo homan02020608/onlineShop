@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 interface InitialUserState {
     user : null | {
         id?: string;
-        email? : any;
+        email? : string;
         first_name? : string;
         last_name? : string;
     }

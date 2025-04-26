@@ -8,7 +8,7 @@ import { SignInButton, SignedIn, SignedOut, SignOutButton, useUser } from '@cler
 
 
 const AuthButton = () => {
-    const { user } = useUser();
+    //const { user } = useUser();
     const [open, setOpen] = useState(false)
     return (
         <>

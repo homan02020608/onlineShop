@@ -4,7 +4,6 @@ import { auth, currentUser } from '@clerk/nextjs/server';
 
 const page = async () => {
     const { userId, sessionId } = await auth();
-    const user = await currentUser();
     return (
         <div>
             <div>UserId: {userId}</div> 

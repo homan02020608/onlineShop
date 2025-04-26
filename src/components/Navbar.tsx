@@ -20,11 +20,7 @@ import { NAV_MENU } from '../../constants';
 
 const Navbar = () => {
 
-    const [open, setOpen] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-    const userState = useSelector((state: RootState) => state.user.user)
-    const cartState = useSelector((state: RootState) => state.cart.cart)
 
     const dispatch = useDispatch();
     const { isSignedIn, user } = useUser();
@@ -34,7 +30,7 @@ const Navbar = () => {
         const userInfo = userSnapShot.docs.map((doc: any) => ({
             ...doc.data()
         }))
-        //setData(userInfo)
+
         if (userInfo.length === 0) {
             await setDoc(doc(db, "user", `${user?.id}`), {
                 userId: user?.id,
@@ -46,9 +42,6 @@ const Navbar = () => {
                 update_At: new Date()
             })
             console.log("success add data")
-            /* await setDoc(doc(db,"user", `${user?.id}`,"orderHistory",`${user?.id}-03`),{
-                order: {cartState}
-            }) */
 
         }
         dispatch(signIn({

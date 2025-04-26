@@ -1,4 +1,4 @@
-import {  Timestamp, collection, doc, getDoc, getDocs } from 'firebase/firestore'
+import {  collection,  getDocs } from 'firebase/firestore'
 import React from 'react'
 import { db } from '../../../../../firebase/firebase'
 import Link from 'next/link'

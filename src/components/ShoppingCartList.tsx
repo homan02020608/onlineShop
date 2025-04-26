@@ -1,9 +1,8 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
     TableHead,
     TableHeader,
@@ -11,7 +10,7 @@ import {
 } from "@/components/ui/table"
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/redux/store'
-import { decrease, increase, remove, total } from '@/redux/cartSlice'
+import { decrease, increase, remove } from '@/redux/cartSlice'
 
 
 interface CardItem {

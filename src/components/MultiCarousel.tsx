@@ -1,7 +1,7 @@
 "use client"
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react'
+import React from 'react'
 import Carousel from 'react-multi-carousel'
 import "react-multi-carousel/lib/styles.css";
 
@@ -16,7 +16,7 @@ const sliderImage = [
 ] 
 
 const MultiCarousel = () => {
-  const [currIndex, setCurrIndex] = useState(0)
+  //const [currIndex, setCurrIndex] = useState(0)
 
   const responsive = {
     superLargeDesktop: {

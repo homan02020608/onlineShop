@@ -3,12 +3,12 @@
 import { RootState } from "@/redux/store";
 import { useUser } from "@clerk/nextjs";
 import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js"
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
-import { ReactNode, useEffect, useState } from "react";
+import { addDoc, collection} from "firebase/firestore";
+import {  useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { db } from "../../firebase/firebase";
 import { v4 } from "uuid";
-import { purchaseCart } from "./PurchaseButton";
+
 
 const CheckoutPage = ({ amount }: { amount: number }) => {
     const stripe = useStripe();
@@ -17,7 +17,6 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
     const [errorMessage, setErrorMessage] = useState<string>();
     const [clientSecret, setClientSecret] = useState("");
     const [address, setAddress] = useState({});
-    const address1: any[] = [];
     const [loading, setLoading] = useState(false);
     const cartState = useSelector((state: RootState) => state.cart.cart)
 

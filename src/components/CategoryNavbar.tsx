@@ -1,13 +1,10 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 import {
     NavigationMenu,
     NavigationMenuContent,
-    NavigationMenuIndicator,
     NavigationMenuItem,
-    NavigationMenuLink,
     NavigationMenuList,
     NavigationMenuTrigger,
-    NavigationMenuViewport,
 } from "@/components/ui/navigation-menu"
 import { CATEGORY_NAV } from '../../constants'
 import Link from 'next/link'
@@ -37,9 +34,6 @@ const CategoryNavbar = () => {
                     </NavigationMenu>
                 </div>
             ))}
-           {/*  <div>
-                <Link href="/" className='font-medium text-sm pb-2 border-b-2 border-gray-400 hover:border-red-300 duration-300 whitespace-nowrap'>利用ガイド</Link>
-            </div> */}
         </div>
     )
 }

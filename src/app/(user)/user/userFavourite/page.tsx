@@ -1,5 +1,4 @@
 import React from 'react'
-import { auth, currentUser } from '@clerk/nextjs/server';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../../../../firebase/firebase';
 import Image from 'next/image';

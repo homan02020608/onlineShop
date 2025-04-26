@@ -1,10 +1,9 @@
-import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore'
+import { collection, getDocs, query, where } from 'firebase/firestore'
 import React from 'react'
 import { db } from '../../../../../../../firebase/firebase'
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -37,11 +36,7 @@ const page = async ({ params }: { params: Promise<{ orderId: string }> }) => {
     ...doc.data(), id: doc.id
 
   }))
-/*   const docRef = doc(db, "user", "user_2sySUESJKtYHIaBQV9E4As0F5bV", "orderHistory", `${orderIdParmas}`)
-  const docSnap = await getDoc(docRef);
-  const detailData1 = [docSnap.data()]
-   */
-  //console.log(orderDetails)
+
   return (
     <div className='flex flex-col w-full border border-gray-200 p-2 m-2'>
       <h1>注文詳細</h1>
