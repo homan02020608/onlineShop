@@ -9,12 +9,6 @@ import {
 import { CATEGORY_NAV } from '../../constants'
 import Link from 'next/link'
 
-interface Menu {
-    menu : {
-        item?:string
-        path? :string
-    }
-}
 
 interface categoryItems {
     column: string;
