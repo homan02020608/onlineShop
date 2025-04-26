@@ -36,10 +36,10 @@ export async function purchaseCart(shoppingCart: { id: string, quantity: number 
             }
 
             for (let i = 0; i < productDocs.length; i++) {
-                const docSnap = productDocs[i];
+                const docSnap = productDocs[i].data();
                 const ref = productRefs[i].ref;
                 const quantity = productRefs[i].quantity;
-                const currentStock = docSnap.data().stock;
+                const currentStock = docSnap?.stock;
 
                 transaction.update(ref, { stock: currentStock - quantity });
             }
