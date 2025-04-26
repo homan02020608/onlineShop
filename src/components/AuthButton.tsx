@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import PersonIcon from '@mui/icons-material/Person';
 import Link from 'next/link';
-import { SignInButton, SignedIn, SignedOut, SignOutButton, useUser } from '@clerk/nextjs';
+import { SignInButton, SignedIn, SignedOut, SignOutButton } from '@clerk/nextjs';
 
 
 

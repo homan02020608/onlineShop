@@ -6,15 +6,14 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import SearchIcon from '@mui/icons-material/Search';
 import AuthButton from './AuthButton';
 import { SignInButton, SignOutButton, useUser } from '@clerk/nextjs';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/redux/store';
+import { useDispatch } from 'react-redux';
+
 import { signIn, signOut } from '@/redux/userSlice';
 import { collection, doc, getDocs, query, setDoc, where } from 'firebase/firestore';
 import { db } from '../../firebase/firebase';
 import AnimationLink from './AnimationLink';
 import DropdownCart from './DropdownCart';
 import { NAV_MENU } from '../../constants';
-
 
 
 

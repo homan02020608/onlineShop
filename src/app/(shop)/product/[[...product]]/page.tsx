@@ -1,6 +1,5 @@
 import ProductCard from '@/components/ProductCard'
 import { collection, getDocs, query, where } from 'firebase/firestore'
-import Image from 'next/image'
 import React from 'react'
 import { db } from '../../../../../firebase/firebase'
 
