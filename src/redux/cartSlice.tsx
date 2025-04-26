@@ -19,7 +19,7 @@ export const cartSlice = createSlice({
     initialState: {
         cart: [],
         amount: 0,
-        total: 0
+        shipping : 0 
     },
     reducers: {
         increase: (state, action: PayloadAction<any>) => {
@@ -49,8 +49,15 @@ export const cartSlice = createSlice({
             state.cart = state.cart.filter((item: { productId: string }) => item.productId !== action.payload.productId)
 
         },
+        addShipping: (state) =>{
+            if (state.amount < 5000){
+                state.shipping = 660
+            }else {
+                state.shipping = 0
+            }
+        }
     }
 })
 
 export default cartSlice.reducer;
-export const { increase, decrease, remove, total } = cartSlice.actions;
+export const { increase, decrease, remove ,addShipping } = cartSlice.actions;

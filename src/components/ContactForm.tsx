@@ -1,13 +1,6 @@
 "use client"
 import React, { useRef } from 'react'
 
-interface ContactFormInfo {
-    name: string
-    email: string
-    message: string
-}
-
-
 
 const ContactForm = () => {
 

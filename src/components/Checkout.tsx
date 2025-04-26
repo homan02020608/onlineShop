@@ -19,13 +19,10 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
 const Checkout = () => {
 
-    let amount = useSelector((state : RootState) =>  state.cart.amount)
+    const amount = useSelector((state : RootState) =>  state.cart.amount)
+    const shipping = useSelector((state : RootState) =>  state.cart.shipping)
     
-    if (amount >= 5000 ) {
-        amount
-    }else{
-       amount += 330
-    }
+    
     return (
         <div className='flex flex-col md:flex-row md:w-full p-4 m-4 gap-10 mx-auto max-w-6xl '>
             <div className=' w-full md:w-2/3'>
@@ -36,7 +33,7 @@ const Checkout = () => {
                     <h1 className='text-3xl font-extrabold mb-2'>Test</h1>
                     <h2 className='text-xl'>
                         has requested :
-                        <span className='font-bold'> ${amount}</span>
+                        <span className='font-bold'> ${amount + shipping}</span>
                     </h2>
                 </div>
                 <Elements
@@ -48,7 +45,7 @@ const Checkout = () => {
                     }}
                 >
                     <AddressForm />
-                    <CheckoutPage amount={amount} />
+                    <CheckoutPage amount={amount + shipping} />
                 </Elements>
             </div>
         </div>

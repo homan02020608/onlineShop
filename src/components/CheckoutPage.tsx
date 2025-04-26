@@ -19,6 +19,7 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
     const [address, setAddress] = useState({});
     const [loading, setLoading] = useState(false);
     const cartState = useSelector((state: RootState) => state.cart.cart)
+    
 
     const getAddress = async () => {
         await elements?.getElement("address")?.getValue().then(function (result) {
@@ -81,7 +82,7 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ amount: amount })
+            body: JSON.stringify({ amount: 100})
         })
             .then((res) => res.json())
             .then((data) => setClientSecret(data.clientSecret))

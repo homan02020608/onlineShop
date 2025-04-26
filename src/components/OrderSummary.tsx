@@ -1,19 +1,22 @@
 "use client"
 import { RootState } from '@/redux/store'
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { purchaseCart } from './PurchaseButton'
 import { useRouter } from 'next/navigation'
+import { addShipping } from '@/redux/cartSlice'
 
 const OrderSummary = () => {
     const amount = useSelector((state: RootState) => state.cart.amount);
     const shoppingCart = useSelector((state: RootState) => state.cart.cart);
+    const dispatch = useDispatch()
     const router = useRouter();
 
     const handleCheck = async () => {
         const result = await purchaseCart(shoppingCart);
 
         if (result.success) {
+            dispatch(addShipping())
             router.push("/checkout")
         }else{
             alert("購入失敗"+result.message)
