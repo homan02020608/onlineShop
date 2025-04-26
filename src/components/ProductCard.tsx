@@ -24,7 +24,7 @@ import Image from 'next/image';
 import { useDispatch } from 'react-redux';
 import { increase } from '@/redux/cartSlice';
 import { db } from '../../firebase/firebase';
-import { SelectGroup, SelectLabel } from '@radix-ui/react-select';
+import { SelectGroup } from '@radix-ui/react-select';
 
 
 

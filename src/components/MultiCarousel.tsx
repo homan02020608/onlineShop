@@ -62,7 +62,7 @@ const MultiCarousel = () => {
 
       >
         {sliderImage.map((item, i) => (
-          <div key={`${item}`} className='p-2 mb-8 '>
+          <div key={`${item}-${i}`} className='p-2 mb-8 '>
             <Link href="/product/123">
               <Image src={`/${item}.jpeg`} alt='' width={500} height={500} />
             </Link>
