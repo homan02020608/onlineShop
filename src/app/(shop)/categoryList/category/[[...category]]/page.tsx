@@ -9,6 +9,7 @@ interface categoryItem {
   productId?: string
   imageUrl?: string
   category?:string
+  title?:string
 }
 
 const page = async ({ params }: { params: Promise<{ category: string }> }) => {
@@ -24,10 +25,12 @@ const page = async ({ params }: { params: Promise<{ category: string }> }) => {
   return (
     <div className='grid grid-cols-2 md:grid-cols-3'>
     {categorySnapShot.map((item: categoryItem) => (
-        <div key={item.id} className='flexCenter flex-col m-2 border-2 border-gray-100 shadow-lg rounded-xl md:m-6 bg-white'>
-                <Image src={`/${item.imageUrl}`} height={500} width={500} sizes='100vh' style={{ width: "100%", height: "auto" }} alt='carouselImage01' className='rounded-xl' />
-                <Link href={`/product/${item.productId}`} className='font-semibold p-2 px-14 m-2 border-2  rounded-full hover:bg-gray-100 whitespace-nowrap'>商品一覧</Link>
-        </div>
+        <Link href={`/product/${item.productId}`} key={item.id} className='flexCenter flex-col m-2 pb-4 border-2 border-gray-100 shadow-lg rounded-xl md:m-6 bg-white '>
+                <Image src={`/${item.imageUrl}`} height={400} width={400} sizes='80vh' style={{ width: "100%", height: "auto" }} alt='carouselImage01' className='rounded-xl hover:scale-105 transition-transform' />
+                <p className='left-0 w-full text-sm font-semibold mt-4 pl-2 pointer-events-none'>#{item.category}</p>
+                <div className='pointer-events-none text-sm '>{item.title}</div>
+                {/* <Link href={`/product/${item.productId}`} className='font-semibold p-2 px-14 m-2 border-2  rounded-full hover:bg-gray-100 whitespace-nowrap'>商品一覧</Link> */}
+        </Link>
     ))}
 </div>
   )

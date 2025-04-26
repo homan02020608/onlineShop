@@ -14,6 +14,7 @@ import { db } from '../../firebase/firebase';
 import AnimationLink from './AnimationLink';
 import DropdownCart from './DropdownCart';
 import { NAV_MENU } from '../../constants';
+import { motion } from "framer-motion"
 
 
 
@@ -63,7 +64,13 @@ const Navbar = () => {
 
 
     return (
-        <nav className='flexBetween top-0 bg-white/50 opacity-100 p-1 min-h-[10vh] shadow-md w-full relative'>
+        <motion.nav
+            className='flexBetween top-0 bg-white/50 opacity-100 p-1 min-h-[10vh] shadow-md w-full relative'
+            initial={{ opacity: 0 , y : -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20  }}
+            transition={{ease:"easeInOut", duration: 0.3}}
+        >
             <div className='flex justify-center items-center font-semibold text-gray-500  m-2 p-2 text-xl'>
                 <Link href="/">
                     WebShop
@@ -92,7 +99,7 @@ const Navbar = () => {
 
 
                     <AuthButton />
-
+ 
                     <div className='flexCenter md:hidden px-2 rounded-full border border-red-100 hover:cursor-pointer '>
                         <MenuIcon onClick={() => setIsMenuOpen(!isMenuOpen)} />
                     </div>
@@ -101,7 +108,7 @@ const Navbar = () => {
                 </div>
 
                 {/* Responsive Nav Menu (mobile)  */}
-                
+
                 <div
                     className={`absolute flexCenter flex-col md:hidden  text-lg text-black z-50 right-0 top-24  bg-white gap-6 font-light transform transition-transform w-full ${isMenuOpen ? "opacity-100" : "opacity-0  pointer-events-none"}`}
                     style={{ transition: "transform 0.3s ease , opacity 0.3s ease" }}
@@ -132,10 +139,10 @@ const Navbar = () => {
                         </div>
                     }
                 </div>
-                
+
 
             </div>
-        </nav>
+        </motion.nav>
     )
 }
 

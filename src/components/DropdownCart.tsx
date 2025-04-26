@@ -6,6 +6,7 @@ import { RootState } from '@/redux/store'
 import { decrease, increase } from '@/redux/cartSlice'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Link from 'next/link'
+import CartCount from './CartCount'
 
 interface CardItem {
     productId: string
@@ -25,8 +26,9 @@ const DropdownCart = () => {
             onMouseEnter={() => setOpen(true)}
             onMouseLeave={() => setOpen(false)}
         >
-            <Link href="/shoppingCart" className='flexCenter flex-col'>
+            <Link href="/shoppingCart" className='relative flexCenter flex-col'>
                 <ShoppingCartIcon />
+                <CartCount/>
                 <div className='hidden md:flex'>カート</div>
             </Link>
 

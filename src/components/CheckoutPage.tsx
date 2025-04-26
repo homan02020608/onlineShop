@@ -60,7 +60,7 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
             elements,
             clientSecret,
             confirmParams: {
-                return_url: `http://localhost:3000/payment-success?amount=${amount}`,
+                return_url: `https://online-shop-xi-seven.vercel.app/payment-success?amount=${amount}`,
             },
 
         })
@@ -82,7 +82,7 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ amount: 100})
+            body: JSON.stringify({ amount: amount})
         })
             .then((res) => res.json())
             .then((data) => setClientSecret(data.clientSecret))

@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import PersonIcon from '@mui/icons-material/Person';
 import Link from 'next/link';
 import { SignInButton, SignedIn, SignedOut, SignOutButton } from '@clerk/nextjs';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 
 
@@ -30,7 +31,9 @@ const AuthButton = () => {
                     </div>
                 </Link>
                 <div className='hidden md:flexCenter '>
-                    <SignOutButton />
+                    <SignOutButton >
+                        <div className='hover:cursor-pointer hover:scale-125 transition-transform'><LogoutIcon/></div>    
+                    </SignOutButton>
                 </div>
             </SignedIn>
 

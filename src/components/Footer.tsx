@@ -1,9 +1,16 @@
+"use client"
 import Link from 'next/link'
 import React from 'react'
+import { motion } from "framer-motion"
 
 const Footer = () => {
   return (
-    <footer className='flexCenter flex-col bottom-0 border-t-2 w-full mt-auto text-black  bg-transparent pb-8'>
+    <motion.footer 
+      className='flexCenter flex-col bottom-0 border-t-2 w-full mt-auto text-black  bg-transparent pb-8'
+      initial={{ opacity: 0 , y : 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ease:"easeInOut", duration: 1}}  
+    >
       <div className='flex p-2 m-4 gap-20 text-sm'>
         {/*  */}
         <ul className='*:p-4'>
@@ -20,7 +27,7 @@ const Footer = () => {
       </div>
 
       <div>©HO-ONLINESHOP</div>
-    </footer>
+    </motion.footer>
   )
 }
 

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import React from 'react'
 import Carousel from 'react-multi-carousel'
 import "react-multi-carousel/lib/styles.css";
+import { motion } from "framer-motion"
 
 const sliderImage = [
   "carouselImage01",
@@ -41,7 +42,12 @@ const MultiCarousel = () => {
 
 
   return (
-    <div className='bg-white/50 max-container -z-[100]'>
+    <motion.div 
+      className='bg-white/50 max-container -z-[100]'
+      initial={{ opacity: 0 , x : -50 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ease:"easeInOut", duration: 0.8}}
+    >
       <Carousel
         responsive={responsive}
         showDots={true}
@@ -56,14 +62,14 @@ const MultiCarousel = () => {
 
       >
         {sliderImage.map((item, i) => (
-          <div key={`${item}-${i}`} className='p-2 mb-8 '>
+          <div key={`${item}`} className='p-2 mb-8 '>
             <Link href="/product/123">
               <Image src={`/${item}.jpeg`} alt='' width={500} height={500} />
             </Link>
           </div>
         ))}
       </Carousel>
-    </div>
+    </motion.div>
   )
 }
 

@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import {
     NavigationMenu,
@@ -8,6 +9,7 @@ import {
 } from "@/components/ui/navigation-menu"
 import { CATEGORY_NAV } from '../../constants'
 import Link from 'next/link'
+import { motion } from "framer-motion"
 
 
 interface categoryItems {
@@ -18,7 +20,12 @@ interface categoryItems {
 
 const CategoryNavbar = () => {
     return (
-        <div className='gap-2 max-container md:flexCenter md:flex-row md:p-2 md:rounded-3xl '>
+        <motion.div 
+            className='gap-2 max-container md:flexCenter md:flex-row md:p-2 md:rounded-3xl '
+            initial={{ opacity: 0 , x : 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ease:"easeInOut", duration: 0.6}}
+        >
             {CATEGORY_NAV.map((category:categoryItems) => (
                 <div className='hidden md:flex ' key={`${category.column}`}>
                     <NavigationMenu>
@@ -35,7 +42,7 @@ const CategoryNavbar = () => {
                     </NavigationMenu>
                 </div>
             ))}
-        </div>
+        </motion.div>
     )
 }
 

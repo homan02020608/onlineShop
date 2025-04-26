@@ -18,11 +18,11 @@ export const CATEGORY_NAV = [
     {
         column: "カテゴリから探す",
         menu: [
-            { item: "生写真", path: "/photos" },
-            { item: "グッズ", path: "/goods" },
+            { item: "生写真", path: "/categoryList/category/photos" },
+            { item: "グッズ", path: "/categoryList/category/goods" },
             { item: "スマートフォン", path: "/categoryList/category/smartphone" },
             { item: "パソコン", path: "/categoryList/category/computer" },
-            { item: "イヤホン", path: "/earphones" },
+            { item: "イヤホン", path: "/categoryList/category/earphones" },
         ]
     },
     { column: "利用ガイド" },
