@@ -11,13 +11,16 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
             price :number
         }
     ]
-}
-const initialCart : InitialCartState [] = [] */
+} */
+
+type initialCartState = any[]
+
+const initialCart : initialCartState  = [] 
 
 export const cartSlice = createSlice({
     name: 'cart',
     initialState: {
-        cart: [],
+        cart: initialCart,
         amount: 0,
         shipping : 0 
     },
