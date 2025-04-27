@@ -1,17 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 
-/* interface InitialCartState {
-    cart : [
-        null | {
-            id:string
-            title:string
-            productId:string 
-            quantity:number 
-            price :number
-        }
-    ]
-} */
 
 type initialCartState = any[]
 
@@ -28,12 +17,12 @@ export const cartSlice = createSlice({
     reducers: {
         increase: (state, action: PayloadAction<any>) => {
             const cartItem: any = state.cart.find((item: { productId: string }) => item.productId === action.payload.productId)
-            if (!cartItem) {
+            if (!cartItem ) {
                 state.cart.push(action.payload)
                 state.amount += action.payload.price * action.payload.quantity
                 state.cartCount += action.payload.quantity
 
-            } else if (cartItem && action.payload.quantity && action.payload.price) {
+            } else if (cartItem && action.payload.quantity && action.payload.price ) {
                 cartItem.quantity += action.payload.quantity
                 state.amount += action.payload.price * action.payload.quantity
                 state.cartCount += action.payload.quantity

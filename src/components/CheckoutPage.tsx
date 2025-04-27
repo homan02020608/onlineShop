@@ -2,12 +2,13 @@
 
 import { RootState } from "@/redux/store";
 import { useUser } from "@clerk/nextjs";
-import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js"
-import { addDoc, collection} from "firebase/firestore";
-import {  useEffect, useState } from "react";
+import { AddressElement, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js"
+import { addDoc, collection } from "firebase/firestore";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { db } from "../../firebase/firebase";
 import { v4 } from "uuid";
+
 
 
 const CheckoutPage = ({ amount }: { amount: number }) => {
@@ -16,15 +17,16 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
     const { user } = useUser();
     const [errorMessage, setErrorMessage] = useState<string>();
     const [clientSecret, setClientSecret] = useState("");
-    const [address, setAddress] = useState({});
+    const [address, setAddress] = useState<any>(null);
     const [loading, setLoading] = useState(false);
     const cartState = useSelector((state: RootState) => state.cart.cart)
-    
+
 
     const getAddress = async () => {
         await elements?.getElement("address")?.getValue().then(function (result) {
             setAddress(result.value.address)
         })
+        
     }
 
     const addToOrderHistory = async () => {
@@ -82,7 +84,7 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ amount: amount})
+            body: JSON.stringify({ amount: amount })
         })
             .then((res) => res.json())
             .then((data) => setClientSecret(data.clientSecret))
@@ -104,20 +106,27 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="p-2">
-            {clientSecret && <PaymentElement />}
+        <div>
+            <form onSubmit={handleSubmit} className="p-2">
 
-            {errorMessage && <div>{errorMessage}</div>}
+                <AddressElement options={{mode:'shipping'}} onChange={(event) => setAddress(event.value)}/>
+                {clientSecret && <PaymentElement />}
 
-            <button
-                disabled={!stripe || loading}
-                className="bg-black text-white w-full p-2 rounded-lg "
-                onClick={() => getAddress()}
-            >
-                {!loading ? `Pay $${amount}` : "Processing..."}
-            </button>
-            
-        </form>
+                {errorMessage && <div>{errorMessage}</div>}
+
+                <button
+                    disabled={!stripe || loading}
+                    className="bg-black text-white w-full p-2 rounded-lg "
+                    //onClick={() => getAddress()}
+                >
+                    {!loading ? `Pay $${amount}` : "Processing..."}
+                </button>
+
+
+
+            </form>
+            <button onClick={() => getAddress()} className="p-2 m-4 border border-red-200 rounded-xl">address</button>
+        </div>
     )
 }
 

@@ -1,5 +1,6 @@
 "use client"
 import React, { useRef } from 'react'
+import { motion } from "framer-motion"
 
 
 const ContactForm = () => {
@@ -30,13 +31,20 @@ const ContactForm = () => {
     };
 
     return (
-        <form className='flexCenter flex-col gap-10 p-6 m-8 bg-slate-100' onSubmit={(e:React.FormEvent<HTMLFormElement>) => submitForm(e)} >
+        <motion.form 
+            className='flexCenter flex-col gap-10 p-6 m-8 ' 
+            onSubmit={(e:React.FormEvent<HTMLFormElement>) => submitForm(e)} 
+            initial={{ opacity: 0 , x : -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ease:"easeInOut", duration: 0.8}}
+        >
             <div className="flex flex-col md:flex-row items-start md:items-center gap-2">
                 <label className="w-32 text-sm font-medium">名前</label>
                 <input
                     type="text"
                     id="name"
                     ref={nameRef}
+                    placeholder='お客様のフルネームご入力ください'
                     //{...register("name")}
                     className="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-300 w-96 md:w-[34rem] "
                 />
@@ -48,6 +56,7 @@ const ContactForm = () => {
                     type="email"
                     id="email"
                     ref={emailRef}
+                    placeholder='メールアドレスご入力ください'
                     //{...register("email")}
                     className="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-300 w-96 md:w-[34rem]"
                 />
@@ -59,6 +68,7 @@ const ContactForm = () => {
                     id="message"
                     ref={messageRef}
                     //{...register("message")}
+                    placeholder='問い合わせ内容ご入力ください'
                     rows={4}
                     className="border border-gray-300 rounded px-2 py-2 focus:outline-none focus:ring-2 focus:ring-red-300 w-96 md:w-[34rem]"
                 ></textarea>
@@ -67,13 +77,13 @@ const ContactForm = () => {
             <div className="text-right">
                 <button
                     type="submit"
-                    className="bg-slate-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+                    className="bg-slate-500 text-white px-8 py-2 rounded  hover:scale-105 transition-transform "
                 >
                     送信
                 </button>
             </div>
 
-        </form>
+        </motion.form>
     )
 }
 

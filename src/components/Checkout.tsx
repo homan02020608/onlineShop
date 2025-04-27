@@ -7,7 +7,6 @@ import {
 import CheckoutPage from '@/components/CheckoutPage'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/redux/store'
-import AddressForm from '@/components/AddressForm'
 import ShoppingCartList from '@/components/ShoppingCartList'
 
 
@@ -44,7 +43,6 @@ const Checkout = () => {
                         currency: "jpy"
                     }}
                 >
-                    <AddressForm />
                     <CheckoutPage amount={amount + shipping} />
                 </Elements>
             </div>

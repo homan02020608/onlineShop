@@ -26,7 +26,7 @@ const AuthButton = () => {
                         マイページ
                         <span
                             style={{ transform: open ? "scaleX(1)" : "scaleX(0)" }}
-                            className='absolute -bottom-2 -left-2 -right-2 h-1 origin-left rounded-full bg-slate-300 transition-transform duration-300 ease-out'
+                            className='absolute -bottom-2 -left-2 -right-2 h-[2px] origin-left rounded-full bg-slate-300 transition-transform duration-300 ease-out'
                         />
                     </div>
                 </Link>

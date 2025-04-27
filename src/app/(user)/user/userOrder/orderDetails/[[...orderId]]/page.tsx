@@ -12,7 +12,7 @@ import {
 
 
 
-interface orderDetail {
+interface orderDetails {
   id: string
   order?: any
   payment: string
@@ -43,17 +43,17 @@ const page = async ({ params }: { params: Promise<{ orderId: string }> }) => {
       <Table className=''>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">商品ID</TableHead>
-            <TableHead className="">値段</TableHead>
-            <TableHead className="">件数</TableHead>
+            <TableHead className="w-[150px]">商品ID</TableHead>
+            <TableHead >値段</TableHead>
+            <TableHead >件数</TableHead>
             <TableHead className="text-right">Amount</TableHead>
           </TableRow>
         </TableHeader>
-        {orderDetails.map((detail: orderDetail) => (
-          <TableBody key={detail.id}>
-            {detail.order.map((itemsDetail: itemDetails) => (
-              <TableRow key={itemsDetail.productId} className='whitespace-nowrap'>
-                <TableCell className="font-medium">{itemsDetail.productId}</TableCell>
+        {orderDetails.map((orderDetail: orderDetails) => (
+          <TableBody key={orderDetail.id}>
+            {orderDetail.order.map((itemsDetail: itemDetails) => (
+              <TableRow key={itemsDetail.productId} className=' '>
+                <TableCell className="font-medium text-sm whitespace-pre-wrap ">{itemsDetail.title}</TableCell>
                 <TableCell>{itemsDetail.price}</TableCell>
                 <TableCell>{itemsDetail.quantity}</TableCell>
                 <TableCell className="text-right">￥{itemsDetail.price * itemsDetail.quantity}</TableCell>

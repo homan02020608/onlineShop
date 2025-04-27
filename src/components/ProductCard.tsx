@@ -18,13 +18,14 @@ import {
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import StarRateIcon from '@mui/icons-material/StarRate';
-import { Timestamp, doc, updateDoc } from 'firebase/firestore';
+import { Timestamp, addDoc, collection, getDocs, query, where } from 'firebase/firestore';
 
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
 import { increase } from '@/redux/cartSlice';
 import { db } from '../../firebase/firebase';
 import { SelectGroup } from '@radix-ui/react-select';
+import { SignInButton, useUser } from '@clerk/nextjs';
 
 
 
@@ -42,19 +43,36 @@ interface ProductInfoProps {
     stock: number
 }
 
-const ProductCard = ({ title, productId, price, bookmarked, imageUrl, id }: ProductInfoProps) => {
+const ProductCard = ({ title, productId, price, imageUrl, id }: ProductInfoProps) => {
     const dispatch = useDispatch()
-    const [quantity, setQuantity] = useState<number>(0);
-    const [bookmark, setBookmark] = useState<boolean>(bookmarked)
+    const { isSignedIn, user } = useUser();
+
+    const [quantity, setQuantity] = useState<number>(1);
+    const [bookmark, setBookmark] = useState<boolean>(false)
     const updateBookmarkItem = async () => {
-        await updateDoc(doc(db, "products", `${id}`), {
-            bookmark: !bookmark
-        })
+        const bookmarkQuery = query(collection(db, 'user', `${user?.id}`, 'FavoriteItems'), where('id', '==', `${id}`))
+        const bookmarkItem = await getDocs(bookmarkQuery)
+        const filterBookmarkItem = bookmarkItem.docs.filter((item) => item.id !== id)
+        if (filterBookmarkItem.length === 0) {
+            await addDoc(collection(db, "user", `${user?.id}`, "FavoriteItems"), {
+                title: title,
+                productId: productId,
+                price: price,
+                imageUrl: imageUrl,
+                id: id,
+                bookmark: bookmark,
+                create_At: new Date(),
+                update_At: new Date(),
+            })
+
+        }
+
         console.log("success")
+
     }
     const updateBookmark = () => {
         updateBookmarkItem()
-        setBookmark(!bookmark)
+        //setBookmark(!bookmark)
 
     }
 
@@ -77,8 +95,13 @@ const ProductCard = ({ title, productId, price, bookmarked, imageUrl, id }: Prod
                         <p><span className='font-semibold'>商品番号:</span> {productId}</p>
                     </CardContent>
                     <CardContent>￥{price}(税込)</CardContent>
-                    <CardContent onClick={() => updateBookmark()}>
-                        <div>{bookmark ? <FavoriteIcon /> : <FavoriteBorderIcon />}<span>お気に入り</span></div>
+                    <CardContent>
+                        {isSignedIn ?
+                            <div onClick={() => updateBookmark()}>{bookmark ? <FavoriteIcon /> : <FavoriteBorderIcon />}<span>お気に入り</span></div>
+                            :
+                            <SignInButton mode='modal'><div > <FavoriteBorderIcon /><span>お気に入り</span></div></SignInButton>
+                        }
+
                     </CardContent>
                     <CardContent>
                         <Select onValueChange={(value) => setQuantity(Number(value))}>
@@ -95,8 +118,11 @@ const ProductCard = ({ title, productId, price, bookmarked, imageUrl, id }: Prod
                         </Select>
                     </CardContent>
                     <CardFooter className='mt-10'>
-                        {/* <button className='w-full m-2 p-4 bg-sky-200 rounded-full hover:bg-sky-100' onClick={() => dispatch(addtoCart({title, productId ,quantity}))}>カートに入れる</button> */}
-                        <button className='w-full m-2 p-4 bg-sky-200 rounded-full hover:bg-sky-100' onClick={() => dispatch(increase({ id, title, productId, quantity, price }))}>カートに入れる</button>
+                        {isSignedIn ?
+                            <button className='w-full m-2 p-4 bg-sky-200 rounded-full hover:bg-sky-100' onClick={() => dispatch(increase({ id, title, productId, quantity, price, imageUrl }))}>カートに入れる</button>
+                            :
+                            <SignInButton mode='modal'><button className='w-full m-2 p-4 bg-sky-200 rounded-full hover:bg-sky-100' >カートに入れる</button></SignInButton>
+                        }
                     </CardFooter>
                 </Card>
             </div>
