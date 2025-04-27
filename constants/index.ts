@@ -32,7 +32,7 @@ export const NAV_MENU = [
     { path: '/news', key: "news", label: "ニュース" },
     { path: '/categoryList', key: "categoryList", label: "カテゴリ" },
     { path: '/guide', key: "guide", label: "利用ガイド" },
-    { path: '/help', key: "help", label: "ヘルプ" },
+    { path: '/contact', key: "help", label: "ヘルプ" },
 ]
 
 export const CATEGORYLIST = [

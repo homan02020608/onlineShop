@@ -8,7 +8,7 @@ const page = async () => {
     <div 
       className='flexCenter flex-col gap-4 ' 
     >
-      <h1 className='text-3xl'>ニュース</h1>
+      <h1 className='text-3xl mt-8'>ニュース</h1>
       <News />
     </div>
   )

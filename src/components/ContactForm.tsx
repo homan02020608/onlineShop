@@ -32,7 +32,7 @@ const ContactForm = () => {
 
     return (
         <motion.form 
-            className='flexCenter flex-col gap-10 p-6 m-8 ' 
+            className='flexCenter flex-col gap-10 p-8 m-10 ' 
             onSubmit={(e:React.FormEvent<HTMLFormElement>) => submitForm(e)} 
             initial={{ opacity: 0 , x : -50 }}
             animate={{ opacity: 1, x: 0 }}
