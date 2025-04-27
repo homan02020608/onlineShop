@@ -9,6 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { currentUser } from '@clerk/nextjs/server'
 
 
 
@@ -29,8 +30,9 @@ interface itemDetails {
 
 
 const page = async ({ params }: { params: Promise<{ orderId: string }> }) => {
+  const user = await currentUser();
   const orderIdParmas = (await params).orderId
-  const q = query(collection(db, "user", "user_2sySUESJKtYHIaBQV9E4As0F5bV", "orderHistory"), where("id", "==", `${orderIdParmas}`))
+  const q = query(collection(db, "user", `${user?.id}`, "orderHistory"), where("id", "==", `${orderIdParmas}`))
   const querySnapShot = await getDocs(q);
   const orderDetails = querySnapShot.docs.map((doc: any) => ({
     ...doc.data(), id: doc.id

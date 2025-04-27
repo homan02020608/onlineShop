@@ -125,7 +125,7 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
 
 
             </form>
-            <button onClick={() => getAddress()} className="p-2 m-4 border border-red-200 rounded-xl">address</button>
+            
         </div>
     )
 }
