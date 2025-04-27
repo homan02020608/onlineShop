@@ -22,13 +22,6 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
     const cartState = useSelector((state: RootState) => state.cart.cart)
 
 
-    const getAddress = async () => {
-        await elements?.getElement("address")?.getValue().then(function (result) {
-            setAddress(result.value.address)
-        })
-        
-    }
-
     const addToOrderHistory = async () => {
         await addDoc(collection(db, "user", `${user?.id}`, "orderHistory"), {
             order: cartState,
