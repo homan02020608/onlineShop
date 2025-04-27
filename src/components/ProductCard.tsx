@@ -16,7 +16,7 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+//import FavoriteIcon from '@mui/icons-material/Favorite';
 import StarRateIcon from '@mui/icons-material/StarRate';
 import { Timestamp, addDoc, collection, getDocs, query, where } from 'firebase/firestore';
 
@@ -48,7 +48,7 @@ const ProductCard = ({ title, productId, price, imageUrl, id }: ProductInfoProps
     const { isSignedIn, user } = useUser();
 
     const [quantity, setQuantity] = useState<number>(1);
-    const [bookmark, setBookmark] = useState<boolean>(false)
+    //const [bookmark, setBookmark] = useState<boolean>(false)
     const updateBookmarkItem = async () => {
         const bookmarkQuery = query(collection(db, 'user', `${user?.id}`, 'FavoriteItems'), where('id', '==', `${id}`))
         const bookmarkItem = await getDocs(bookmarkQuery)
@@ -60,7 +60,7 @@ const ProductCard = ({ title, productId, price, imageUrl, id }: ProductInfoProps
                 price: price,
                 imageUrl: imageUrl,
                 id: id,
-                bookmark: bookmark,
+                bookmark: true,
                 create_At: new Date(),
                 update_At: new Date(),
             })
@@ -97,7 +97,7 @@ const ProductCard = ({ title, productId, price, imageUrl, id }: ProductInfoProps
                     <CardContent>￥{price}(税込)</CardContent>
                     <CardContent>
                         {isSignedIn ?
-                            <div onClick={() => updateBookmark()}>{bookmark ? <FavoriteIcon /> : <FavoriteBorderIcon />}<span>お気に入り</span></div>
+                            <div onClick={() => updateBookmark()}>{<FavoriteBorderIcon />}<span>お気に入り</span></div>
                             :
                             <SignInButton mode='modal'><div > <FavoriteBorderIcon /><span>お気に入り</span></div></SignInButton>
                         }
