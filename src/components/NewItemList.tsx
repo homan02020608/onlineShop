@@ -52,7 +52,7 @@ const NewItemList = () => {
                             <Link href={`/product/${item.productId}`}>
                                 <Image src={`/${item.imageUrl}`} alt={String(item.title)} width={200} height={200} />
                             </Link>
-                            <div className='whitespace-pre-lines p-2 font-thin'>{item.title}</div>
+                            <div className=' whitespace-pre-wrap p-1 font-thin text-xs md:text-base'>{item.title}</div>
                         </div>
                     ))}
                 </div>

@@ -45,7 +45,7 @@ const MultiCarousel = () => {
 
   return (
     <motion.div 
-      className='bg-white/50 max-container -z-[100] p-6'
+      className='max-container -z-[100] p-6'
       initial={{ opacity: 0 , x : -50 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ease:"easeInOut", duration: 0.8}}

@@ -36,7 +36,7 @@ const News = () => {
     
     return (
         <motion.div 
-            className='flexCenter w-full  bg-white/50  mt-8 '
+            className='flexCenter w-full  mt-8 '
             initial={{ opacity: 0 , x : 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ease:"easeInOut", duration: 0.8}}
