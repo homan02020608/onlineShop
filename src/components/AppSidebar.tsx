@@ -13,7 +13,7 @@ import Link from 'next/link'
 
 
   const sidebarInfo = [
-    { column: "会員情報照会、変更" ,path:"/user/userPage/userOrder"},
+    { column: "会員情報照会、変更" ,path:"/user/userOrder"},
     { column: "お届け先の確認、登録、変更",path:"/user/userOrder"},
     { column: "注文履歴" ,path:"/user/userOrder"},
     { column: "お気に入り" ,path:"/user/userFavourite"},

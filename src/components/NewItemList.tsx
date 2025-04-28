@@ -39,20 +39,20 @@ const NewItemList = () => {
     
     return (
         <motion.div 
-            className='flexCenter w-full flex-col  mt-8 p-8 '
+            className='flexCenter w-full flex-col mt-8 '
             initial={{ opacity: 0 , x : -50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ease:"easeInOut", duration: 1.2}}
+            transition={{ease:"easeInOut", duration: 1}}
         >
             <h1 className='text-3xl font-light my-4 '>新着商品</h1>
-            <div className='flexCenter flex-col rounded-3xl md:w-auto shadow-2xl'>
-                <div className='grid grid-cols-2 md:grid-cols-4  p-2 m-4 gap-8'>
+            <div className='flexCenter flex-col rounded-3xl sm:w-[30rem] md:w-[50rem] shadow-2xl'>
+                <div className='grid grid-cols-2 md:grid-cols-4  p-2 m-2 '>
                     {itemList.map((item: NewItemListProps, index) => (
-                        <div key={`${item.productId}-${index}`} className='w-[10rem] whitespace-pre-wrap hover:scale-105 hover:transition-transform'>
+                        <div key={`${item.productId}-${index}`} className='w-[10rem] hover:scale-105 hover:transition-transform'>
                             <Link href={`/product/${item.productId}`}>
-                                <Image src={`/${item.imageUrl}`} alt={String(item.title)} width={400} height={400} />
+                                <Image src={`/${item.imageUrl}`} alt={String(item.title)} width={200} height={200} />
                             </Link>
-                            <div className='whitespace-pre-wrap p-2 font-thin'>{item.title}</div>
+                            <div className='whitespace-pre-lines p-2 font-thin'>{item.title}</div>
                         </div>
                     ))}
                 </div>
