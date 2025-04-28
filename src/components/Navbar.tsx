@@ -110,7 +110,7 @@ const Navbar = () => {
                 {/* Responsive Nav Menu (mobile)  */}
 
                 <div
-                    className={`absolute flexCenter flex-col md:hidden  text-lg text-black z-50 right-0 top-20  bg-white gap-6 font-light transform transition-transform w-full ${isMenuOpen ? "opacity-100" : "opacity-0  pointer-events-none"}`}
+                    className={`absolute flexCenter flex-col md:hidden border-b border-slate-300 text-lg text-black z-50 right-0 top-20  bg-white gap-6 font-light transform transition-transform w-full ${isMenuOpen ? "opacity-100" : "opacity-0  pointer-events-none"}`}
                     style={{ transition: "transform 0.3s ease , opacity 0.3s ease" }}
                 >
                     {NAV_MENU.map((info) => (
@@ -119,20 +119,20 @@ const Navbar = () => {
 
                     {isSignedIn ?
                         <div className='flexCenter flex-col text-center w-full  '>
-                            <Link href="/user" className='w-full p-2 text-center hover:bg-slate-100  transition-all'>マイページ</Link>
+                            <Link href="/user" className='w-full p-2 text-center hover:bg-slate-100  transition-all' onClick={() => setIsMenuOpen(!isMenuOpen)}>マイページ</Link>
                         </div>
                         :
                         <div className='flexCenter  w-full gap-4 m-2'>
                             <SignInButton mode='modal'>
-                                <div className=' p-2 text-center border px-8 rounded-full border-gray-200 hover:bg-slate-100  transition-all'>ログイン</div>
+                                <div className=' p-2 text-center border px-8 rounded-full border-gray-200 hover:bg-slate-100  transition-all' onClick={() => setIsMenuOpen(!isMenuOpen)}>ログイン</div>
                             </SignInButton>
 
-                            <Link href="/sign-up" className=' p-2 text-center border px-8 rounded-full border-gray-200 hover:bg-slate-100  transition-all'>新規登録</Link>
+                            <Link href="/sign-up" className=' p-2 text-center border px-8 rounded-full border-gray-200 hover:bg-slate-100  transition-all' onClick={() => setIsMenuOpen(!isMenuOpen)}>新規登録</Link>
                         </div>
                     }
 
                     {isSignedIn &&
-                        <div className='flexCenter flex-col text-center w-full p-2 hover:bg-slate-100  transition-all '>
+                        <div className='flexCenter flex-col text-center w-full p-2 hover:bg-slate-100  transition-all ' onClick={() => setIsMenuOpen(!isMenuOpen)}>
                             <SignOutButton >
                                 ログアウト
                             </SignOutButton>

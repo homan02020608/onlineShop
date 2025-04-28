@@ -104,7 +104,10 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
 
                 <AddressElement options={{mode:'shipping'}} onChange={(event) => setAddress(event.value)}/>
                 {clientSecret && <PaymentElement />}
-
+                <p className="font-light text-sm text-red-600">※テスト用クレジットカード番号: 4242 4242 4242 4242</p>
+                <p className="font-light text-sm text-red-600">※上記の番号をご利用ください</p>
+                <p className="font-light text-sm text-red-600">有効期限とセキュリティコードは任意の番号で大丈夫です</p>
+               
                 {errorMessage && <div>{errorMessage}</div>}
 
                 <button

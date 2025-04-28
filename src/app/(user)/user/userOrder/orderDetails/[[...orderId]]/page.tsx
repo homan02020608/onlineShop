@@ -10,6 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { currentUser } from '@clerk/nextjs/server'
+import BackButton from '@/components/BackButton'
 
 
 
@@ -40,31 +41,34 @@ const page = async ({ params }: { params: Promise<{ orderId: string }> }) => {
   }))
 
   return (
-    <div className='flex flex-col w-full border border-gray-200 p-2 m-2'>
-      <h1>注文詳細</h1>
-      <Table className=''>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[150px]">商品ID</TableHead>
-            <TableHead >値段</TableHead>
-            <TableHead >件数</TableHead>
-            <TableHead className="text-right">Amount</TableHead>
-          </TableRow>
-        </TableHeader>
-        {orderDetails.map((orderDetail: orderDetails) => (
-          <TableBody key={orderDetail.id}>
-            {orderDetail.order.map((itemsDetail: itemDetails) => (
-              <TableRow key={itemsDetail.productId} className=' '>
-                <TableCell className="font-medium text-sm whitespace-pre-wrap ">{itemsDetail.title}</TableCell>
-                <TableCell>{itemsDetail.price}</TableCell>
-                <TableCell>{itemsDetail.quantity}</TableCell>
-                <TableCell className="text-right">￥{itemsDetail.price * itemsDetail.quantity}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        ))}
+    <div className='w-full mr-8 h-[80vh] p-2'>
+      <BackButton/>
+      <div className='flex flex-col w-full border border-gray-200 p-2 m-2'>
+        <h1>注文詳細</h1>
+        <Table className=''>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-[150px]">商品ID</TableHead>
+              <TableHead >値段</TableHead>
+              <TableHead >件数</TableHead>
+              <TableHead className="text-right">Amount</TableHead>
+            </TableRow>
+          </TableHeader>
+          {orderDetails.map((orderDetail: orderDetails) => (
+            <TableBody key={orderDetail.id}>
+              {orderDetail.order.map((itemsDetail: itemDetails) => (
+                <TableRow key={itemsDetail.productId} className=' '>
+                  <TableCell className="font-medium text-sm whitespace-pre-wrap ">{itemsDetail.title}</TableCell>
+                  <TableCell>{itemsDetail.price}</TableCell>
+                  <TableCell>{itemsDetail.quantity}</TableCell>
+                  <TableCell className="text-right">￥{itemsDetail.price * itemsDetail.quantity}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          ))}
 
-      </Table>
+        </Table>
+      </div>
     </div>
   )
 }

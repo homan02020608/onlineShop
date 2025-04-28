@@ -21,10 +21,10 @@ const page = async () => {
   }))
  
   return (
-    <div className='flex flex-col gap-10 p-2 m-4  '>
-      <h1 className='flexCenter test-3xl font-semibold'>ご注文履歴</h1>
-      <div>
-        <div className='flex flex-col   p-2 m-4 gap-4 min-w-[300px] md:w-[500px]'>
+    <div className='flex flex-col gap-4'>
+      <h1 className='flexCenter test-3xl font-light'>ご注文履歴</h1>
+      <div className='h-[100vh] overflow-y-scroll '>
+        <div className='flex flex-col  p-2  gap-4 min-w-[300px] md:w-[600px]'>
           {userOrders.map((order: userOrder) => (
             <div key={order.id} className='flex flex-col text-sm md:text-base p-4 m-4 border-4 border-gray-100 rounded-xl gap-8 *:flex *:flex-col '>
               <div className=''>注文番号:<span>{order.id}</span>

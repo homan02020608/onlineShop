@@ -33,7 +33,7 @@ const News = () => {
     useEffect(() => {
         fetchNewsData();
     }, [])
-    console.log(news)
+    
     return (
         <motion.div 
             className='flexCenter w-full  bg-white/50  mt-8 '

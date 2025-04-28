@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     Card,
     CardContent,
@@ -26,6 +26,8 @@ import { increase } from '@/redux/cartSlice';
 import { db } from '../../firebase/firebase';
 import { SelectGroup } from '@radix-ui/react-select';
 import { SignInButton, useUser } from '@clerk/nextjs';
+import { saveRecentViewedItems } from './RecentViewedItemList';
+import BackButton from './BackButton';
 
 
 
@@ -36,7 +38,6 @@ interface ProductInfoProps {
     category: string
     imageUrl: string
     price: number
-    bookmarked: boolean
     id: string
     update_At?: Timestamp
     create_At?: Timestamp
@@ -76,9 +77,19 @@ const ProductCard = ({ title, productId, price, imageUrl, id }: ProductInfoProps
 
     }
 
+    useEffect(() => {
+        saveRecentViewedItems({
+            productId: productId,
+            title: title,
+            imageUrl: imageUrl,
+        })
+    }, [])
+
     return (
         <div className='flexCenter md:flex-row gap-2 flex-col lg:gap-20 '>
-            <div className='flex '>
+
+            <div className='flex flex-col p-4 gap-4'>
+                <BackButton />
                 <Image src={`/${imageUrl}`} height={400} width={400} style={{ width: "auto", height: "auto" }} alt='carouselImage02' />
             </div>
 
@@ -89,7 +100,7 @@ const ProductCard = ({ title, productId, price, imageUrl, id }: ProductInfoProps
                         <CardDescription>Card Description</CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <div>{[1, 2, 3, 4, 5].map((star) => (<StarRateIcon key={`star-${star}`} className='size-6 md:size-12 text-black/30' />))}</div>
+                        <div>{[1, 2, 3, 4, 5].map((star , index) => (<StarRateIcon key={`star-${star}`} className={`size-6 md:size-8 ${(index !== 4) ? 'text-yellow-300' : 'text-slate-200'} `} />))}</div>
                     </CardContent>
                     <CardContent>
                         <p><span className='font-semibold'>商品番号:</span> {productId}</p>
@@ -97,9 +108,9 @@ const ProductCard = ({ title, productId, price, imageUrl, id }: ProductInfoProps
                     <CardContent>￥{price}(税込)</CardContent>
                     <CardContent>
                         {isSignedIn ?
-                            <div onClick={() => updateBookmark()}>{<FavoriteBorderIcon />}<span>お気に入り</span></div>
+                            <div onClick={() => updateBookmark()} className='hover:bg-slate-50 hover:cursor-pointer flex items-center w-[12rem] p-2 rounded-md'>{<FavoriteBorderIcon />}<span>お気に入りに追加</span></div>
                             :
-                            <SignInButton mode='modal'><div > <FavoriteBorderIcon /><span>お気に入り</span></div></SignInButton>
+                            <SignInButton mode='modal'><div > <FavoriteBorderIcon /><span>お気に入りに追加</span></div></SignInButton>
                         }
 
                     </CardContent>
@@ -119,7 +130,7 @@ const ProductCard = ({ title, productId, price, imageUrl, id }: ProductInfoProps
                     </CardContent>
                     <CardFooter className='mt-10'>
                         {isSignedIn ?
-                            <button className='w-full m-2 p-4 bg-sky-200 rounded-full hover:bg-sky-100' onClick={() => dispatch(increase({ id, title, productId, quantity, price, imageUrl }))}>カートに入れる</button>
+                            <button className='w-full m-2 p-4 bg-sky-200 rounded-full hover:bg-sky-100 hover:scale-105 hover:transition-transform' onClick={() => dispatch(increase({ id, title, productId, quantity, price, imageUrl }))}>カートに入れる</button>
                             :
                             <SignInButton mode='modal'><button className='w-full m-2 p-4 bg-sky-200 rounded-full hover:bg-sky-100' >カートに入れる</button></SignInButton>
                         }

@@ -20,7 +20,7 @@ export async function POST(req: NextRequest ) {
     const toHostMailData = {
         from : data.email,
         to : "dalemanhappy@gmail.com",
-        subject : `[問い合わせ] ${data.name}様より`,
+        subject : `[問い合わせ番号:${data.id}] ${data.name}様より`,
         text: `${data.message} Send from ${data.email}`,
         html: `
             <p>[名前]</p>

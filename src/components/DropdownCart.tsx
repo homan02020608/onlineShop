@@ -50,14 +50,22 @@ const DropdownCart = () => {
                     <h1 className=' z-20 pt-2 pl-4 font-semibold left-0 '>カート商品({cartItems.cartCount}点)</h1>
                     <div className='flex flex-col justify-start h-80 w-80  shadow-xl overflow-auto gap-2'>
                         {cartItems.cart.map(({ productId, quantity, title, price, imageUrl }: CardItem) => (
-                            <div key={productId} className='flexCenter flex-row whitespace-normal text-sm m-4' >
+                            <motion.div
+                                key={productId}
+                                className='flexCenter flex-row whitespace-normal text-sm m-4'
+                                initial={{ opacity: 0, x: -50 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                whileTap={{ opacity: 0, x: -50 }}
+                               
+                                transition={{ ease: "easeInOut", duration: 0.5 }}
+                            >
                                 <Link href={`/product/${productId}`}>
-                                <Image src={`/${imageUrl}`} width={100} height={100} alt={productId} />
+                                    <Image src={`/${imageUrl}`} width={100} height={100} alt={productId} />
                                 </Link>
                                 <div className='flexCenter flex-col whitespace-pre-wrap m-2'>
                                     <div className='flexCenter flex-row'>
                                         <div>{title}</div>
-                                        <button className={`text-sm hover:cursor-pointer`} onClick={() => { dispatch(remove({ productId, quantity, price })) }}><DeleteIcon /></button>
+                                        <motion.button  className={`text-sm hover:cursor-pointer`} onClick={() => { dispatch(remove({ productId, quantity, price })) }}><DeleteIcon /></motion.button>
                                     </div>
 
                                     <div className='flexCenter flex-row gap-x-10 pt-2'>
@@ -70,7 +78,7 @@ const DropdownCart = () => {
                                         <div>￥{price}</div>
                                     </div>
                                 </div>
-                            </div>
+                            </motion.div>
                         ))}
                     </div>
                 </motion.div>

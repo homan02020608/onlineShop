@@ -4,6 +4,7 @@ import { db } from '../../../../../firebase/firebase';
 import Image from 'next/image';
 import Link from 'next/link';
 import { currentUser } from '@clerk/nextjs/server';
+import BackButton from '@/components/BackButton';
 
 
 const page = async () => {
@@ -16,9 +17,11 @@ const page = async () => {
 
 
     return (
-        <div className='flexCenter flex-col  p-2 gap-10'>
-            <h1 className=''>お気に入り</h1>
-            <div className='grid grid-cols-2 md:grid-cols-3'>
+        <div className='flexCenter flex-col p-2'>
+            <h1 className='text-3xl font-light'>お気に入り</h1>
+            <BackButton />
+            
+            <div className='grid grid-cols-1 md:grid-cols-3 m-2 h-[80vh] overflow-y-scroll'>
                 {favouriteProducts.map((item: any , index) => (
                     <div key={`${item.id}-${index}`} className='flexCenter flex-col  m-2   border-2 border-gray-100 shadow-lg rounded-xl md:m-6 bg-white'>
                         <Image src={`/${item.imageUrl}`} height={300} width={300} style={{ height: "auto" }} alt='carouselImage01' className='rounded-xl bg-red-400' />

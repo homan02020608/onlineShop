@@ -5,7 +5,7 @@ export const NAV_ITEMS = [
 ];
 
 export const CATEGORY_NAV = [
-    {
+     {
         column: "新着商品",
         menu: [
             { item: "1月商品", path: "/", },
@@ -18,14 +18,19 @@ export const CATEGORY_NAV = [
     {
         column: "カテゴリから探す",
         menu: [
-            { item: "生写真", path: "/categoryList/category/photos" },
-            { item: "グッズ", path: "/categoryList/category/goods" },
+            { item: "タブレット", path: "/categoryList/category/taplet" },
             { item: "スマートフォン", path: "/categoryList/category/smartphone" },
             { item: "パソコン", path: "/categoryList/category/computer" },
             { item: "イヤホン", path: "/categoryList/category/earphones" },
         ]
     },
-    { column: "利用ガイド" },
+    { 
+        column: "ガイド", 
+        menu : [
+            { item : "利用者ガイド" ,path : "/guide"},
+            { item : "問い合わせ" ,path : "/contant"},
+        ]
+    },
 ]
 
 export const NAV_MENU = [

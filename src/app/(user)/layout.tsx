@@ -1,12 +1,23 @@
-import UserPageSidebar from '@/components/UserPageSidebar'
+import AppSidebar from '@/components/AppSidebar'
+import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
+import { cookies } from 'next/headers'
 import React from 'react'
 
-const userLayout = ({ children } : { children : React.ReactNode }) => {
+const userLayout = async({ children }: { children: React.ReactNode }) => {
+    const cookieStore = await cookies()
+    const defaultOpen = cookieStore.get("sidebar_state")?.value === "true"
+   
     return (
-        <div className='flex justify-center p-4 md:gap-10 lg:gap-40'>
-            <UserPageSidebar/>
-            {children}
-        </div>
+        <SidebarProvider
+        defaultOpen={defaultOpen}
+        >
+            <AppSidebar />
+            <SidebarTrigger/>
+            <div className='w-full flexCenter  p-2 md:gap-10 lg:gap-40 '>
+                {/* <UserPageSidebar /> */}
+                {children}
+            </div>
+        </SidebarProvider>
     )
 }
 

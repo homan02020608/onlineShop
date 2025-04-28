@@ -7,13 +7,15 @@ import "react-multi-carousel/lib/styles.css";
 import { motion } from "framer-motion"
 
 const sliderImage = [
-  "carouselImage01",
-  "carouselImage02",
-  "carouselImage03",
-  "carouselImage04",
-  "iphone16pro_black",
-  "iphone16pro_white",
+  {path:"13inch iPad Pro (M4) シルバー",productId:"1"},
+  {path:"MacBook Air 13インチ M4 16GB シルバー",productId:"7"},
+  {path:"13inch iPad Pro (M4) スペースブラック",productId:"2"},
+  {path:"Surface Pro(第11世代) サファイア",productId:"13"},
+  {path:"iphone16pro_black",productId:"3"},
+  {path:"iphone16pro_white",productId:"6"},
 
+  ,
+  
 ] 
 
 const MultiCarousel = () => {
@@ -53,7 +55,7 @@ const MultiCarousel = () => {
         showDots={true}
         infinite={true}
         autoPlay={true}
-        autoPlaySpeed={3000}
+        autoPlaySpeed={2000}
         keyBoardControl={true}
         transitionDuration={300}
         renderDotsOutside={false}
@@ -62,9 +64,9 @@ const MultiCarousel = () => {
 
       >
         {sliderImage.map((item, i) => (
-          <div key={`${item}-${i}`} className='p-2 mb-8 '>
-            <Link href="/product/123">
-              <Image src={`/${item}.jpeg`} alt='' width={500} height={500} />
+          <div key={`${item?.productId}`} className='p-2 mb-8 '>
+            <Link href={`/product/${item?.productId}`}>
+              <Image src={`/${item?.path}.jpeg`} alt='' width={500} height={500} />
             </Link>
           </div>
         ))}

@@ -1,6 +1,8 @@
 "use client"
 import React, { useRef } from 'react'
 import { motion } from "framer-motion"
+import { useRouter } from 'next/navigation'
+import { v4 } from "uuid";
 
 
 const ContactForm = () => {
@@ -8,16 +10,20 @@ const ContactForm = () => {
     const nameRef = useRef<HTMLInputElement>(null)
     const emailRef = useRef<HTMLInputElement>(null)
     const messageRef = useRef<HTMLTextAreaElement>(null)
-
+    const router = useRouter();
+    
     const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+
+        const contactId = v4()
 
         const data = {
             name : nameRef.current?.value,
             email : emailRef.current?.value,
             message : messageRef.current?.value,
+            id : contactId
         }
-        //console.log(data)
+        
         await fetch("api/contactEmail", {
             method: "POST",
             headers : {
@@ -28,11 +34,12 @@ const ContactForm = () => {
         }).then((res) => {
             if(res.status === 200) console.log("メール送信成功!!");
         })
+        router.push(`/contact/contact-success/${contactId}`)
     };
 
     return (
         <motion.form 
-            className='flexCenter flex-col gap-10 p-8 m-10 ' 
+            className='flexCenter flex-col gap-10 p-8  w-full ' 
             onSubmit={(e:React.FormEvent<HTMLFormElement>) => submitForm(e)} 
             initial={{ opacity: 0 , x : -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -46,7 +53,7 @@ const ContactForm = () => {
                     ref={nameRef}
                     placeholder='お客様のフルネームご入力ください'
                     //{...register("name")}
-                    className="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-300 w-96 md:w-[34rem] "
+                    className="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-300 w-80 md:w-[34rem] "
                 />
             </div>
 
@@ -58,7 +65,7 @@ const ContactForm = () => {
                     ref={emailRef}
                     placeholder='メールアドレスご入力ください'
                     //{...register("email")}
-                    className="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-300 w-96 md:w-[34rem]"
+                    className="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-300 w-80 md:w-[34rem]"
                 />
             </div>
 
@@ -70,7 +77,7 @@ const ContactForm = () => {
                     //{...register("message")}
                     placeholder='問い合わせ内容ご入力ください'
                     rows={4}
-                    className="border border-gray-300 rounded px-2 py-2 focus:outline-none focus:ring-2 focus:ring-red-300 w-96 md:w-[34rem]"
+                    className="border border-gray-300 rounded px-2 py-2 focus:outline-none focus:ring-2 focus:ring-red-300 w-80 md:w-[34rem]"
                 ></textarea>
             </div>
 
