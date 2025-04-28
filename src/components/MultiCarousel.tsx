@@ -63,7 +63,7 @@ const MultiCarousel = () => {
       //ssr={true} // means to render carousel on server-side.
 
       >
-        {sliderImage.map((item, i) => (
+        {sliderImage.map((item) => (
           <div key={`${item?.productId}`} className='p-2 mb-8 '>
             <Link href={`/product/${item?.productId}`}>
               <Image src={`/${item?.path}.jpeg`} alt='' width={500} height={500} />
