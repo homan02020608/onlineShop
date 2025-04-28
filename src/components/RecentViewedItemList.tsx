@@ -39,7 +39,7 @@ const RecentViewedItemList = () => {
     return (
         <motion.div 
             className='flexCenter max-container w-full flex-col mt-20 '
-            initial={{ opacity: 0 , x : 50 }}
+            initial={{ opacity: 0 , x : -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ease:"easeInOut", duration: 1}}
         >
