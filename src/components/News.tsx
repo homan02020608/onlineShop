@@ -20,6 +20,7 @@ const News = () => {
     const [news, setNews] = useState<newsItems[]>([]);
     const fetchNewsData = async () => {
         try {
+            /* pathnameを用いて、news page以外に使用の場合は一部データのみ取得 */
             const newsSnapShot = await getDocs(query(collection(db, "news"), orderBy('create_At', 'desc'), limit((pathname == "/" ? 5 : 10))));
             const news = newsSnapShot.docs.map((doc) => ({
                 ...doc.data(), Id: doc.id

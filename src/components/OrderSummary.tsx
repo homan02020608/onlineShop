@@ -12,6 +12,7 @@ const OrderSummary = () => {
     const dispatch = useDispatch()
     const router = useRouter();
 
+    /* checkout page の前に一回在庫チェックを行う、不足の場合はalert */
     const handleCheck = async () => {
         const result = await purchaseCartCheck(shoppingCart);
 
@@ -39,10 +40,6 @@ const OrderSummary = () => {
                                 <div>Shipping:</div>
                                 <div>{amount >= 5000 ? "無料" : "￥660"}</div>
                             </div>
-                            {/*                     <div className='gap-x-10 border-t-2 border-gray-200 mt-4'>
-                      <div>Point:</div>
-                      <div>350</div>
-                  </div> */}
                             <div className='gap-x-10'>
                                 <div>Coupon:</div>
                                 <div>なし</div>

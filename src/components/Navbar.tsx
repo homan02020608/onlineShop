@@ -76,7 +76,7 @@ const Navbar = () => {
                     WebShop
                 </Link>
             </div>
-
+            {/* パソコンデバイス用 */}
             <div className='flexCenter p-2 left-0 lg:pr-10  '>
                 <div className='flex gap-2 font-normal text-gray-500 md:gap-4 lg:gap-6'>
                     <div className='hidden md:flex duration-500'>
@@ -107,7 +107,7 @@ const Navbar = () => {
 
                 </div>
 
-                {/* Responsive Nav Menu (mobile)  */}
+                {/* Responsive Nav Menu (モバイルデバイス用)  */}
 
                 <div
                     className={`absolute flexCenter flex-col md:hidden border-b z-50 border-slate-300 text-lg text-black right-0 top-20  bg-white gap-6 font-light transform transition-transform w-full ${isMenuOpen ? "opacity-100" : "opacity-0  pointer-events-none"}`}

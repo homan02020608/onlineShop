@@ -48,12 +48,11 @@ interface ProductInfoProps {
 const ProductCard = ({ title, productId, price, imageUrl, id ,category }: ProductInfoProps) => {
     const dispatch = useDispatch()
     const { isSignedIn, user } = useUser();
-
     const [quantity, setQuantity] = useState<number>(1);
-    //const [bookmark, setBookmark] = useState<boolean>(false)
     const updateBookmarkItem = async () => {
         const bookmarkQuery = query(collection(db, 'user', `${user?.id}`, 'FavoriteItems'), where('id', '==', `${id}`))
         const bookmarkItem = await getDocs(bookmarkQuery)
+        /* データベースに気に入り商品追加 */
          if (bookmarkItem.docs.length === 0) {
             await setDoc(doc(db, "user", `${user?.id}`, "FavouriteItems", `${id}`), {
                 title: title,
@@ -73,7 +72,6 @@ const ProductCard = ({ title, productId, price, imageUrl, id ,category }: Produc
     }
     const updateBookmark = () => {
         updateBookmarkItem()
-        //setBookmark(!bookmark)
 
     }
 
@@ -87,12 +85,10 @@ const ProductCard = ({ title, productId, price, imageUrl, id ,category }: Produc
 
     return (
         <div className='flexCenter md:flex-row gap-2 flex-col lg:gap-20 '>
-
             <div className='flex flex-col p-4 gap-4'>
                 <BackButton />
                 <Image src={`/${imageUrl}`} height={400} width={400} style={{ width: "auto", height: "auto" }} alt='carouselImage02' />
             </div>
-
             <div className='flex justify-center m-6 w-auto min-h-[65vh] whitespace-normal '>
                 <Card key={title} className='flex flex-col p-2 pb-10 w-auto h-full border-0 md:text-base text-lg shadow-none '>
                     <CardHeader>
@@ -112,7 +108,6 @@ const ProductCard = ({ title, productId, price, imageUrl, id ,category }: Produc
                             :
                             <SignInButton mode='modal'><div > <FavoriteBorderIcon /><span>お気に入りに追加</span></div></SignInButton>
                         }
-
                     </CardContent>
                     <CardContent>
                         <Select onValueChange={(value) => setQuantity(Number(value))}>

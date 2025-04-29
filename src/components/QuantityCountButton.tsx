@@ -10,6 +10,7 @@ interface QuantityCountProps {
     quantity: number
 }
 
+/* 商品項目ではなくカートに入れた全部商品の数をカウント*/
 const QuantityCountButton = ({ quantityAllow, productId, price, quantity }: QuantityCountProps) => {
     const dispatch = useDispatch()
 

@@ -32,7 +32,8 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
             id: v4()
         })
     }
-
+/*      Pay button を押すと 支払いプロセスとチェックが行い、エラーが出るとreturn処理
+     エラーなしの場合は購入者入力した情報をデータベースに記録、payment-success pageに遷移   */
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setLoading(true);

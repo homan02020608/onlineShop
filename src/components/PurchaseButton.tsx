@@ -5,6 +5,7 @@ import { db } from '../../firebase/firebase';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 
+/* checkout pageでトランザクション処理における在庫チェックを行った後、商品を購入し、データベースの在庫数を減らす*/
 export async function purchaseCart(shoppingCart: { id: string, quantity: number }[]) {
     try {
         await runTransaction(db, async (transaction) => {
@@ -18,7 +19,6 @@ export async function purchaseCart(shoppingCart: { id: string, quantity: number 
                 productRefs.map((item) => transaction.get(item.ref))
             );
 
-            
 
             for (let i = 0; i < productDocs.length; i++) {
                 const docSnap = productDocs[i];
@@ -55,7 +55,7 @@ export async function purchaseCart(shoppingCart: { id: string, quantity: number 
     }
 } 
 
-
+/* 在庫チェックのみ */
 export async function purchaseCartCheck(shoppingCart: { id: string, quantity: number }[]) {
     try {
         await runTransaction(db, async (transaction) => {

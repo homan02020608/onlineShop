@@ -9,7 +9,7 @@ interface RecentViewedItem {
     title: string
     imageUrl: string
 }
-
+/* localStorageに最近閲覧した商品を記録 */
 export const saveRecentViewedItems = (item: RecentViewedItem) => {
     const existing = JSON.parse(localStorage.getItem("viewedItems") || '[]');
 
@@ -22,6 +22,7 @@ export const saveRecentViewedItems = (item: RecentViewedItem) => {
     localStorage.setItem('viewedItems', JSON.stringify((limitedItem)))
 }
 
+/* localStorageに保存された直近閲覧した四つの商品を取得 */
 export const getRecentViewedItems = () => {
     if (typeof window !== 'undefined') {
         return JSON.parse(localStorage.getItem('viewedItems') || '[]')
