@@ -12,17 +12,11 @@ const Footer = () => {
       transition={{ ease: "easeInOut", duration: 1 }}
     >
       <div className='flex  p-2 m-4 gap-20 text-sm'>
-        {/*  */}
-        {/*         <ul className='*:p-4'>
-          <li className='hover:underline hover:cursor-pointer'>よくある質問</li>
-          <li className='hover:underline hover:cursor-pointer'>問い合わせ</li>
-          <li className='hover:underline hover:cursor-pointer'>ご利用ガイド</li>
-        </ul> */}
         {/* Contact us */}
-        <div className='flex flex-row *:p-4'>
-          <Link href="/qna" className='hover:underline hover:cursor-pointer'><li>よくある質問</li></Link>
-          <Link href="/contact" className='hover:underline hover:cursor-pointer'><li>問い合わせ</li></Link>
-          <Link href="/guide" className='hover:underline hover:cursor-pointer'><li>利用ガイド</li></Link>
+        <div className='flex flex-row gap-2 whitespace-nowrap '>
+          <Link href="/qna" className='hover:underline hover:cursor-pointer text-xs md:text-sm'><li>よくある質問</li></Link>
+          <Link href="/contact" className='hover:underline hover:cursor-pointer text-xs md:text-sm'><li>問い合わせ</li></Link>
+          <Link href="/guide" className='hover:underline hover:cursor-pointer text-xs md:text-sm'><li>利用ガイド</li></Link>
         </div>
 
       </div>

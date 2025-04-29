@@ -12,7 +12,7 @@ const userLayout = async({ children }: { children: React.ReactNode }) => {
         defaultOpen={defaultOpen}
         >
             <AppSidebar />
-            <SidebarTrigger/>
+            <SidebarTrigger size={"icon"} className='size-20'/>
             <div className='w-full flexCenter  p-2 md:gap-10 lg:gap-40 '>
                 {/* <UserPageSidebar /> */}
                 {children}

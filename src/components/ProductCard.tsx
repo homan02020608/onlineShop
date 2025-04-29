@@ -18,7 +18,7 @@ import {
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 //import FavoriteIcon from '@mui/icons-material/Favorite';
 import StarRateIcon from '@mui/icons-material/StarRate';
-import { Timestamp, addDoc, collection, getDocs, query, where } from 'firebase/firestore';
+import { Timestamp, collection, doc, getDocs, query, setDoc, where } from 'firebase/firestore';
 
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
@@ -28,6 +28,7 @@ import { SelectGroup } from '@radix-ui/react-select';
 import { SignInButton, useUser } from '@clerk/nextjs';
 import { saveRecentViewedItems } from './RecentViewedItemList';
 import BackButton from './BackButton';
+import Link from 'next/link';
 
 
 
@@ -44,7 +45,7 @@ interface ProductInfoProps {
     stock: number
 }
 
-const ProductCard = ({ title, productId, price, imageUrl, id }: ProductInfoProps) => {
+const ProductCard = ({ title, productId, price, imageUrl, id ,category }: ProductInfoProps) => {
     const dispatch = useDispatch()
     const { isSignedIn, user } = useUser();
 
@@ -53,9 +54,8 @@ const ProductCard = ({ title, productId, price, imageUrl, id }: ProductInfoProps
     const updateBookmarkItem = async () => {
         const bookmarkQuery = query(collection(db, 'user', `${user?.id}`, 'FavoriteItems'), where('id', '==', `${id}`))
         const bookmarkItem = await getDocs(bookmarkQuery)
-        const filterBookmarkItem = bookmarkItem.docs.filter((item) => item.id !== id)
-        if (filterBookmarkItem.length === 0) {
-            await addDoc(collection(db, "user", `${user?.id}`, "FavoriteItems"), {
+         if (bookmarkItem.docs.length === 0) {
+            await setDoc(doc(db, "user", `${user?.id}`, "FavouriteItems", `${id}`), {
                 title: title,
                 productId: productId,
                 price: price,
@@ -66,7 +66,7 @@ const ProductCard = ({ title, productId, price, imageUrl, id }: ProductInfoProps
                 update_At: new Date(),
             })
 
-        }
+        } 
 
         console.log("success")
 
@@ -97,7 +97,7 @@ const ProductCard = ({ title, productId, price, imageUrl, id }: ProductInfoProps
                 <Card key={title} className='flex flex-col p-2 pb-10 w-auto h-full border-0 md:text-base text-lg shadow-none '>
                     <CardHeader>
                         <CardTitle>{title}</CardTitle>
-                        <CardDescription>Card Description</CardDescription>
+                        <CardDescription><Link href={`/categoryList/category/${category}`} className='hover:underline'>#{category}</Link></CardDescription>
                     </CardHeader>
                     <CardContent>
                         <div>{[1, 2, 3, 4, 5].map((star , index) => (<StarRateIcon key={`star-${star}`} className={`size-6 md:size-8 ${(index !== 4) ? 'text-yellow-300' : 'text-slate-200'} `} />))}</div>

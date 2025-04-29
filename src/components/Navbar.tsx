@@ -110,7 +110,7 @@ const Navbar = () => {
                 {/* Responsive Nav Menu (mobile)  */}
 
                 <div
-                    className={`absolute flexCenter flex-col md:hidden border-b border-slate-300 text-lg text-black z-50 right-0 top-20  bg-white gap-6 font-light transform transition-transform w-full ${isMenuOpen ? "opacity-100" : "opacity-0  pointer-events-none"}`}
+                    className={`absolute flexCenter flex-col md:hidden border-b z-50 border-slate-300 text-lg text-black right-0 top-20  bg-white gap-6 font-light transform transition-transform w-full ${isMenuOpen ? "opacity-100" : "opacity-0  pointer-events-none"}`}
                     style={{ transition: "transform 0.3s ease , opacity 0.3s ease" }}
                 >
                     {NAV_MENU.map((info) => (
