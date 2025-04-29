@@ -43,6 +43,6 @@ export const NAV_MENU = [
 export const CATEGORYLIST = [
     { path: 'smartphone', key: 'smartphone',title: 'スマートフォン' , img:"/smartphoneImage.jpeg"},
     { path: 'computer', key: 'computer' ,title:'パソコン', img:'/computerImage.jpeg'},
-    { path: 'taplet', key: 'taplet' ,title:'タブレット', img:'/13inch iPad Pro (M4) シルバー.jpeg'},
+    { path: 'tablet', key: 'tablet' ,title:'タブレット', img:'/13inch iPad Pro (M4) シルバー.jpeg'},
     { path: 'earphones', key: 'earphones' ,title:'イヤホン', img:'/airpods pro 2.jpeg'},
 ]
