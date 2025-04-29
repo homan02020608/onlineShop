@@ -44,7 +44,7 @@ const MultiCarousel = () => {
     }
   };
 
-  const ButtonGroup = ({ next, previous, goToSlide, ...rest }: any) => {
+  const ButtonGroup = ({ next, previous, ...rest }: any) => {
     const { carouselState: { currentSlide } } = rest;
     return (
         <div className="carousel-button-group bg-red-100">
