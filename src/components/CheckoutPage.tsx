@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { db } from "../../firebase/firebase";
 import { v4 } from "uuid";
+import { purchaseCart } from "./PurchaseButton";
 
 
 
@@ -32,8 +33,8 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
             id: v4()
         })
     }
-/*      Pay button を押すと 支払いプロセスとチェックが行い、エラーが出るとreturn処理
-     エラーなしの場合は購入者入力した情報をデータベースに記録、payment-success pageに遷移   */
+    /*      Pay button を押すと 支払いプロセスとチェックが行い、エラーが出るとreturn処理
+         エラーなしの場合は購入者入力した情報をデータベースに記録、payment-success pageに遷移   */
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setLoading(true);
@@ -42,11 +43,14 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
             return;
         }
 
+        const result = await purchaseCart(cartState)
+
         const { error: submitError } = await elements.submit();
 
-        if (submitError) {
-            setErrorMessage(submitError.message);
+        if (submitError || !(result.success) ) {
+            setErrorMessage(submitError?.message);
             setLoading(false);
+            alert("購入失敗" + result.message)
             return;
         }
 
@@ -103,18 +107,17 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
         <div>
             <form onSubmit={handleSubmit} className="p-2">
 
-                <AddressElement options={{mode:'shipping'}} onChange={(event) => setAddress(event.value)}/>
+                <AddressElement options={{ mode: 'shipping' }} onChange={(event) => setAddress(event.value)} />
                 {clientSecret && <PaymentElement />}
                 <p className="font-light text-sm text-red-600">※テスト用クレジットカード番号: 4242 4242 4242 4242</p>
                 <p className="font-light text-sm text-red-600">※上記の番号をご利用ください</p>
                 <p className="font-light text-sm text-red-600">有効期限とセキュリティコードは任意の番号で大丈夫です</p>
-               
+
                 {errorMessage && <div>{errorMessage}</div>}
 
                 <button
                     disabled={!stripe || loading}
                     className="bg-black text-white w-full p-2 rounded-lg "
-                    //onClick={() => getAddress()}
                 >
                     {!loading ? `Pay $${amount}` : "Processing..."}
                 </button>
@@ -122,7 +125,7 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
 
 
             </form>
-            
+
         </div>
     )
 }

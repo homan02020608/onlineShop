@@ -8,6 +8,7 @@ import CheckoutPage from '@/components/CheckoutPage'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/redux/store'
 import ShoppingCartList from '@/components/ShoppingCartList'
+import BackButton from './BackButton'
 
 
 if (process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY === undefined) {
@@ -18,13 +19,15 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
 const Checkout = () => {
 
-    const amount = useSelector((state : RootState) =>  state.cart.amount)
-    const shipping = useSelector((state : RootState) =>  state.cart.shipping)
-    
-    
+    const amount = useSelector((state: RootState) => state.cart.amount)
+    const shipping = useSelector((state: RootState) => state.cart.shipping)
+
+
     return (
         <div className='flex flex-col md:flex-row md:w-full p-4 m-4 gap-10 mx-auto max-w-6xl '>
-            <div className=' w-full md:w-2/3'>
+
+            <div className='flex flex-col w-full md:w-2/3'>
+                <BackButton />
                 <ShoppingCartList quantityAllow={false} />
             </div>
             <div className='bg-slate-100 w-full md:w-1/3 p-4 '>

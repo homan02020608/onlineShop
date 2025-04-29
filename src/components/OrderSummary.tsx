@@ -21,6 +21,7 @@ const OrderSummary = () => {
             router.push("/checkout")
         } else {
             alert("購入失敗" + result.message)
+            
         }
     }
 
