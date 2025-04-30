@@ -18,7 +18,7 @@ export const CATEGORY_NAV = [
     {
         column: "カテゴリから探す",
         menu: [
-            { item: "タブレット", path: "/categoryList/category/taplet" },
+            { item: "タブレット", path: "/categoryList/category/tablet" },
             { item: "スマートフォン", path: "/categoryList/category/smartphone" },
             { item: "パソコン", path: "/categoryList/category/computer" },
             { item: "イヤホン", path: "/categoryList/category/earphones" },
@@ -28,7 +28,7 @@ export const CATEGORY_NAV = [
         column: "ガイド", 
         menu : [
             { item : "利用者ガイド" ,path : "/guide"},
-            { item : "問い合わせ" ,path : "/contant"},
+            { item : "問い合わせ" ,path : "/contact"},
         ]
     },
 ]
