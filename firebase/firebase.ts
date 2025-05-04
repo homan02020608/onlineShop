@@ -4,7 +4,6 @@ import { getFirestore } from "firebase/firestore";
 import firebase from "firebase/app";
 
 const firebaseConfig = {
-  //apiKey: "AIzaSyCZm245c1Et9PB_87-4lM6mbTRxI0UwoFk",
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTHDOMAIN,
   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECTID,
