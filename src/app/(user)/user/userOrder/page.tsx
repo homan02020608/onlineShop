@@ -1,4 +1,4 @@
-import {  collection,  getDocs } from 'firebase/firestore'
+import {  collection,  getDocs, orderBy, query } from 'firebase/firestore'
 import React from 'react'
 import { db } from '../../../../../firebase/firebase'
 import Link from 'next/link'
@@ -15,7 +15,7 @@ interface userOrder {
 
 const page = async () => {
   const user = await currentUser();
-  const userOrderSnapshot = await getDocs(collection(db, "user", `${user?.id}`, "orderHistory"))
+  const userOrderSnapshot = await getDocs(query(collection(db, "user", `${user?.id}`, "orderHistory"),orderBy('create_At','desc')))
   const userOrders = userOrderSnapshot.docs.map((doc) => ({
     ...doc.data() 
   }))
